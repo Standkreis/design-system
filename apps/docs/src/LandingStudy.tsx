@@ -32,7 +32,7 @@ export function LandingStudy({ locale }: { locale: Locale }) {
               "Standkreis / eine gemeinsame Designsprache",
             )}
           </span>
-          <h1 className="editorial-heading" id="landing-title">
+          <h1 className="editorial-heading" id="landing-title" tabIndex={-1}>
             {t("Closer to nature.", "Der Natur näher.")}
             <br />
             {t("Closer together.", "Einander näher.")}

@@ -36,3 +36,5 @@ Card now offers `default`, `soft`, `outline`, `primary` and `inverse` surface va
 Button adds an `inverse` variant for dark photographic contexts and an independent `shape` option (`rounded` by default, or `pill`). Inverse background, text, hover and focus use shared tokens. Existing button defaults and sizes remain compatible.
 
 The reference uses Card for application frames, repeated field panels, logo panels, the type specimen and principle articles. Page CSS controls composition and editorial layout. Shared surface colour/radius decisions stay in the library. Editorial headings carry an explicit class; global heading and paragraph rules must not override component typography. Isolated browser fixtures compare shared styles with and without the reference stylesheet.
+
+The dedicated component reference exposes all Badge variants in both themes. Its destructive variant now uses the opaque `destructive` / `destructive-foreground` token pair, matching Button, instead of a translucent dark background with a fixed white label. This fixes the low contrast found by the expanded preview checks.
