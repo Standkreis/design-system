@@ -8,6 +8,11 @@
   --font-sans: var(--font-standkreis);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-inverse-action: var(--inverse-action);
+  --color-inverse-action-foreground: var(--inverse-action-foreground);
+  --color-inverse-action-hover: var(--inverse-action-hover);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);

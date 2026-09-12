@@ -39,3 +39,23 @@ Use `<Brand />` or `<BrandMark />`; the centre dot is always included. The forme
 The current teal study uses white labels on a deeper action shade and distinguishes filled actions (`bg-primary text-primary-foreground`) from readable coloured text (`text-primary-ink`). Do not use `text-primary` for light-mode body text. Both roles are available in the shared tokens and Tailwind theme.
 
 `primary-hover` preserves white-label contrast on hover. Use the opaque hover colour instead of reducing primary opacity. Marketing photographs belong to the reference app and are not bundled into the UI package.
+
+## Shared surfaces and photographic actions
+
+```tsx
+<Card variant="soft">
+  <CardHeader>
+    <CardTitle asChild><h2>A quiet beginning</h2></CardTitle>
+    <CardDescription>Follow your curiosity.</CardDescription>
+  </CardHeader>
+  <CardContent>...</CardContent>
+</Card>
+
+<Button asChild variant="inverse" shape="pill" size="lg">
+  <a href="#discover">Discover</a>
+</Button>
+```
+
+Card surface variants are `default`, `soft`, `outline`, `primary` and `inverse`. Use `asChild` on Card when an article or section is appropriate; pass one child element. CardTitle and CardDescription also support semantic children. Layout can be composed locally while surface styles follow the shared theme. Changing `--radius` updates the variants through the common radius scale.
+
+The inverse button is designed for dark or photographic backgrounds. It stays light in both themes and includes its own visible focus treatment. `shape="pill"` is available independently of the colour variant; the default shape remains rounded. Avoid page-wide heading/paragraph overrides: apply editorial typography through explicit classes so dialogs, notices and shared controls retain their package defaults.

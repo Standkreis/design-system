@@ -9,7 +9,7 @@ The reference app now opens with an image-led marketing study, followed by the e
 - Give the landscape room. Preserve natural photographic colours rather than applying a teal tint. Use a dark local gradient behind white hero copy, with a solid fallback background if the image cannot load.
 - Use neutral light/dark surfaces around imagery. Reserve teal for small accents and deliberate actions.
 - Alternate wide landscapes, detailed observation and people caring for living things. Future commissions should include community activity, regional food and natural water systems, with appropriate participant permission.
-- Use confident type and generous space. Keep Titillium and the selected Gathered circle mark consistent. The rounded white hero CTA is a local marketing treatment of the shared shadcn-based Button.
+- Use confident type and generous space. Keep Titillium and the selected Gathered circle mark consistent. The rounded white hero CTA uses the shared shadcn-based Button with `variant="inverse"` and `shape="pill"`.
 - Keep controls and information legible. Product interfaces still use familiar shared controls; photographic marketing treatments do not replace form or map surfaces.
 - Avoid invented testimonials, impact figures, scientific overlays or implied community endorsements. The stock references are not evidence of Standkreis projects. There is no autoplay, parallax or attention-seeking loop.
 

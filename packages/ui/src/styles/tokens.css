@@ -24,6 +24,11 @@
   --input: #859889;
   --ring: #0f766e;
   --brand-turquoise: #14b8a6;
+  --inverse: #20382b;
+  --inverse-foreground: #edf4e9;
+  --inverse-action: #ffffff;
+  --inverse-action-foreground: #17251b;
+  --inverse-action-hover: #edf0e9;
   --radius: 1rem;
   --font-standkreis: "Titillium Web", ui-sans-serif, system-ui, sans-serif;
   --motion-fast: 160ms;
@@ -58,4 +63,9 @@
   --input: #778d76;
   --ring: #5eead4;
   --brand-turquoise: #14b8a6;
+  --inverse: #20382b;
+  --inverse-foreground: #edf4e9;
+  --inverse-action: #ffffff;
+  --inverse-action-foreground: #17251b;
+  --inverse-action-hover: #edf0e9;
 }

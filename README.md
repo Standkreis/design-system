@@ -25,7 +25,7 @@ tests/             brand/contrast invariants and browser behaviour
 scripts/           library build, shadcn additions and packed-consumer verification
 ```
 
-Components: Button, Card, Input, Textarea, Label, Badge, Separator, Tabs, Checkbox, Switch, Select, Dialog, Sheet and Tooltip. Standkreis patterns: Brand/BrandMark, IdentificationAction, UncertaintyNotice and DiscoveryFeedback. Providers support German/English labels and persistent system/light/dark preferences.
+Components: Button (including inverse/pill marketing actions), Card (shared surface variants), Input, Textarea, Label, Badge, Separator, Tabs, Checkbox, Switch, Select, Dialog, Sheet and Tooltip. Standkreis patterns: Brand/BrandMark, IdentificationAction, UncertaintyNotice and DiscoveryFeedback. Providers support German/English labels and persistent system/light/dark preferences.
 
 ## Install the package in another application
 

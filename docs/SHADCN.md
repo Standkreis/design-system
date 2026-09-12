@@ -27,4 +27,12 @@ The pinned CLI is a development dependency. Runtime packages include Radix UI, L
 
 The teal-400 study adds `primary-ink` for Button/Badge links and discovery feedback. Filled primary controls retain `primary-foreground`; checked switches use it for their thumb in both themes, and checked checkboxes retain a visible `primary-ink` border.
 
-The imagery-led study changes primary labels to white and adds an opaque `primary-hover` token for Button and Badge. This prevents hover transparency from reducing label contrast on light backgrounds. The white rounded hero CTA is an intentional local marketing treatment using the shared Button.
+The imagery-led study changes primary labels to white and adds an opaque `primary-hover` token for Button and Badge. This prevents hover transparency from reducing label contrast on light backgrounds. The white rounded hero CTA is now the shared `Button` with `variant="inverse"` and `shape="pill"`.
+
+## Shared defaults after the preview review
+
+Card now offers `default`, `soft`, `outline`, `primary` and `inverse` surface variants. All use the shared radius scale. Card, CardTitle and CardDescription accept `asChild` through Radix Slot, preserving semantic article/heading/paragraph elements without extra wrappers. Card descriptions inherit an internal colour variable from the nearest Card, including white/light text on primary and inverse surfaces.
+
+Button adds an `inverse` variant for dark photographic contexts and an independent `shape` option (`rounded` by default, or `pill`). Inverse background, text, hover and focus use shared tokens. Existing button defaults and sizes remain compatible.
+
+The reference uses Card for application frames, repeated field panels, logo panels, the type specimen and principle articles. Page CSS controls composition and editorial layout. Shared surface colour/radius decisions stay in the library. Editorial headings carry an explicit class; global heading and paragraph rules must not override component typography. Isolated browser fixtures compare shared styles with and without the reference stylesheet.

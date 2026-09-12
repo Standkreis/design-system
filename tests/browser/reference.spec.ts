@@ -143,3 +143,118 @@ test("photographic landing loads locally and remains usable in German", async ({
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(page.viewportSize()!.width);
 });
+
+test("shared typography matches package-only styles in both themes", async ({
+  page,
+}) => {
+  const { readFile } = await import("node:fs/promises");
+  const css = await readFile(
+    new URL("../../packages/ui/dist/styles.css", import.meta.url),
+    "utf8",
+  );
+  await page.goto("/");
+  await page.getByTestId("identify").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  for (const theme of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme: theme });
+    await expect
+      .poll(() =>
+        page.locator("html").evaluate((el) => el.classList.contains("dark")),
+      )
+      .toBe(theme === "dark");
+    await page.evaluate(() =>
+      Promise.all(
+        document
+          .getAnimations()
+          .map((animation) => animation.finished.catch(() => {})),
+      ),
+    );
+    const comparisons = await page.evaluate((css) => {
+      const frame = document.createElement("iframe");
+      document.body.append(frame);
+      const doc = frame.contentDocument!;
+      doc.documentElement.className = document.documentElement.className;
+      const style = doc.createElement("style");
+      style.textContent = css;
+      doc.head.append(style);
+      const values = (node: Element) => {
+        const s = node.ownerDocument.defaultView!.getComputedStyle(node);
+        return {
+          fontSize: s.fontSize,
+          lineHeight: s.lineHeight,
+          letterSpacing: s.letterSpacing,
+          marginBottom: s.marginBottom,
+          color: s.color,
+        };
+      };
+      try {
+        return [
+          '[data-slot="dialog-title"]',
+          '[data-slot="dialog-content"] [data-slot="uncertainty-notice"] h3',
+        ].map((selector) => {
+          const original = document.querySelector(selector)!;
+          const notice = original.closest('[data-slot="uncertainty-notice"]');
+          const context = (notice ?? original).cloneNode(true) as Element;
+          doc.body.append(context);
+          const copy = notice ? context.querySelector("h3")! : context;
+
+          return {
+            selector,
+            preview: values(original),
+            standalone: values(copy),
+          };
+        });
+      } finally {
+        frame.remove();
+      }
+    }, css);
+    for (const result of comparisons)
+      expect(result.preview, result.selector).toEqual(result.standalone);
+  }
+});
+
+test("shared surfaces respond to radius tokens and inverse buttons carry their own focus style", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const radii = await page.evaluate(() => {
+    const selectors = [
+      ".field-card",
+      ".logo-primary",
+      ".logo-inverse",
+      ".application-example",
+      ".type-specimen",
+      ".principle-grid article",
+    ];
+    const sample = () =>
+      selectors.map((selector) => {
+        const node = document.querySelector(selector)!;
+        return {
+          selector,
+          slot: node.getAttribute("data-slot"),
+          radius: parseFloat(getComputedStyle(node).borderRadius),
+        };
+      });
+    const before = sample();
+    document.documentElement.style.setProperty("--radius", "2rem");
+    const after = sample();
+    document.documentElement.style.removeProperty("--radius");
+    return { before, after };
+  });
+  radii.after.forEach((value, i) => {
+    expect(value.slot, value.selector).toBe("card");
+    expect(value.radius - radii.before[i].radius, value.selector).toBe(16);
+  });
+  const hero = page.getByRole("link", {
+    name: "Explore the foundations",
+    exact: true,
+  });
+  await expect(hero).toHaveAttribute("data-variant", "inverse");
+  await expect(hero).toHaveAttribute("data-shape", "pill");
+  await page.keyboard.press("Tab");
+  await hero.focus();
+  await expect(hero).toBeFocused();
+  await expect(hero).toHaveCSS("outline-style", "solid");
+  await expect(hero).toHaveCSS("outline-color", "rgb(255, 255, 255)");
+  await expect(hero).toHaveCSS("outline-width", "2px");
+});

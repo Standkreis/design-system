@@ -32,7 +32,7 @@ export function LandingStudy({ locale }: { locale: Locale }) {
               "Standkreis / eine gemeinsame Designsprache",
             )}
           </span>
-          <h1 id="landing-title">
+          <h1 className="editorial-heading" id="landing-title">
             {t("Closer to nature.", "Der Natur näher.")}
             <br />
             {t("Closer together.", "Einander näher.")}
@@ -44,7 +44,7 @@ export function LandingStudy({ locale }: { locale: Locale }) {
             )}
           </p>
           <div className="hero-actions">
-            <Button asChild size="lg" className="hero-button">
+            <Button asChild size="lg" variant="inverse" shape="pill">
               <a href="#identity">
                 {t("Explore the foundations", "Die Grundlagen entdecken")}
                 <ArrowRight aria-hidden="true" />
@@ -92,7 +92,7 @@ export function LandingStudy({ locale }: { locale: Locale }) {
           <span className="eyebrow">
             {t("Made for the living world", "Für eine lebendige Welt")}
           </span>
-          <h2 id="story-title">
+          <h2 className="editorial-heading" id="story-title">
             {t("It begins with curiosity.", "Es beginnt mit Neugier.")}
             <br />
             <span>
@@ -124,7 +124,7 @@ export function LandingStudy({ locale }: { locale: Locale }) {
           </figure>
           <div className="story-copy">
             <Leaf size={26} strokeWidth={1.5} aria-hidden="true" />
-            <h3>
+            <h3 className="editorial-heading">
               {t(
                 "From noticing a leaf to caring for a place.",
                 "Vom Entdecken eines Blattes zur Fürsorge für einen Ort.",
@@ -219,7 +219,7 @@ export function ImageryStudy({ locale }: { locale: Locale }) {
               alt={photo.alt}
             />
             <figcaption>
-              <h3>{photo.title}</h3>
+              <h3 className="editorial-heading">{photo.title}</h3>
               <p>{photo.copy}</p>
               <a href={photo.url}>
                 {photo.author} / Unsplash
@@ -234,7 +234,7 @@ export function ImageryStudy({ locale }: { locale: Locale }) {
           <span className="eyebrow">
             {t("From the inspiration", "Aus der Inspiration")}
           </span>
-          <h3>
+          <h3 className="editorial-heading">
             {t(
               "Let the image set the mood.",
               "Das Bild gibt die Stimmung vor.",
@@ -251,7 +251,7 @@ export function ImageryStudy({ locale }: { locale: Locale }) {
           <span className="eyebrow">
             {t("For Standkreis", "Für Standkreis")}
           </span>
-          <h3>
+          <h3 className="editorial-heading">
             {t("Keep the invitation honest.", "Eine ehrliche Einladung.")}
           </h3>
           <p>

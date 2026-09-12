@@ -93,7 +93,9 @@ function Section({
       <div className="section-heading">
         <div>
           <span className="eyebrow">{number} / STANDKREIS</span>
-          <h2 id={`${id}-title`}>{title}</h2>
+          <h2 className="editorial-heading" id={`${id}-title`}>
+            {title}
+          </h2>
         </div>
         <p>{description}</p>
       </div>
@@ -231,7 +233,7 @@ function Reference({
                   <span className="eyebrow">
                     {t("A shared foundation", "Eine gemeinsame Grundlage")}
                   </span>
-                  <h2>
+                  <h2 className="editorial-heading">
                     {t(
                       "Different rooms. The same place.",
                       "Verschiedene Räume. Derselbe Ort.",
@@ -245,7 +247,7 @@ function Reference({
                   )}
                 </p>
               </div>
-              <div className="application-example">
+              <Card variant="default" className="application-example">
                 <div className="application-top">
                   <Brand
                     product={
@@ -277,7 +279,7 @@ function Reference({
                           <Compass size={16} aria-hidden="true" />
                           {t("Follow your curiosity", "Folge deiner Neugier")}
                         </span>
-                        <h2>
+                        <h2 className="editorial-heading">
                           {t(
                             "There is life\nall around you.",
                             "Um dich herum\nsteckt Leben.",
@@ -322,7 +324,7 @@ function Reference({
                           </DialogContent>
                         </Dialog>
                       </div>
-                      <div className="field-card">
+                      <Card variant="soft" className="field-card">
                         <span className="eyebrow">
                           {t("A quiet beginning", "Ein ruhiger Anfang")}
                         </span>
@@ -343,7 +345,7 @@ function Reference({
                             )}
                           </p>
                         </div>
-                      </div>
+                      </Card>
                     </div>
                   </TabsContent>
                   <TabsContent value="species">
@@ -353,7 +355,7 @@ function Reference({
                           <Flower2 size={16} aria-hidden="true" />
                           {t("Look a little closer", "Schau etwas genauer hin")}
                         </span>
-                        <h2>
+                        <h2 className="editorial-heading">
                           {t(
                             "A small world.\nWorth exploring.",
                             "Eine kleine Welt.\nViel zu entdecken.",
@@ -400,7 +402,7 @@ function Reference({
                           </SheetContent>
                         </Sheet>
                       </div>
-                      <div className="field-card">
+                      <Card variant="soft" className="field-card">
                         <Flower2
                           size={140}
                           strokeWidth={0.9}
@@ -413,7 +415,7 @@ function Reference({
                           )}
                         </p>
                         <i>Malus domestica</i>
-                      </div>
+                      </Card>
                     </div>
                   </TabsContent>
                   <TabsContent value="community">
@@ -423,7 +425,7 @@ function Reference({
                           <Users size={16} aria-hidden="true" />
                           {t("A shared commitment", "Ein gemeinsames Anliegen")}
                         </span>
-                        <h2>
+                        <h2 className="editorial-heading">
                           {t(
                             "What could\nthis place become?",
                             "Was könnte aus\ndiesem Ort werden?",
@@ -445,7 +447,7 @@ function Reference({
                           </a>
                         </Button>
                       </div>
-                      <div className="field-card">
+                      <Card variant="soft" className="field-card">
                         <Users size={110} strokeWidth={1} aria-hidden="true" />
                         <p>
                           {t(
@@ -453,7 +455,7 @@ function Reference({
                             "Lokale Namen und Bilder.\nEine vertraute Oberfläche.",
                           )}
                         </p>
-                      </div>
+                      </Card>
                     </div>
                   </TabsContent>
                 </Tabs>
@@ -466,7 +468,7 @@ function Reference({
                     )}
                   </span>
                 </div>
-              </div>
+              </Card>
             </section>
 
             <Section
@@ -479,14 +481,14 @@ function Reference({
               )}
             >
               <div className="logo-specimens">
-                <div className="logo-primary">
+                <Card variant="primary" className="logo-primary">
                   <span>{t("Gathered circle", "Gemeinsamer Kreis")}</span>
                   <BrandMark width={118} height={118} />
                   <small>
                     {t("One shared centre", "Eine gemeinsame Mitte")}
                   </small>
-                </div>
-                <div className="logo-inverse">
+                </Card>
+                <Card variant="inverse" className="logo-inverse">
                   <Brand product="Atlas" />
                   <div className="small-marks">
                     {[16, 24, 36, 48].map((size) => (
@@ -497,7 +499,7 @@ function Reference({
                     {t("Download SVG", "SVG herunterladen")}{" "}
                     <ArrowRight size={16} aria-hidden="true" />
                   </a>
-                </div>
+                </Card>
               </div>
             </Section>
 
@@ -532,10 +534,10 @@ function Reference({
                   </div>
                 ))}
               </div>
-              <div className="type-specimen">
+              <Card variant="default" className="type-specimen">
                 <div>
                   <span className="eyebrow">TITILLIUM WEB / 600</span>
-                  <h3>
+                  <h3 className="editorial-heading">
                     {t("Stay curious.", "Bleib neugierig.")}
                     <br />
                     <span>{t("Go at your pace.", "In deinem Tempo.")}</span>
@@ -547,7 +549,7 @@ function Reference({
                 </div>
                 <div>
                   <span className="eyebrow">400 / 600 / 700 / ITALIC</span>
-                  <h4>
+                  <h4 className="editorial-heading">
                     {t(
                       "Every encounter is a beginning.",
                       "Jede Begegnung ist ein Anfang.",
@@ -561,7 +563,7 @@ function Reference({
                   </p>
                   <i>Malus domestica · Quercus robur</i>
                 </div>
-              </div>
+              </Card>
               <div className="icon-row">
                 {[
                   [ScanLine, t("Identify", "Bestimmen")],
@@ -873,11 +875,25 @@ function Reference({
                 ].map(([Icon, title, body]) => {
                   const Symbol = Icon as typeof Leaf;
                   return (
-                    <article key={String(title)}>
-                      <Symbol size={25} strokeWidth={1.65} aria-hidden="true" />
-                      <h3>{String(title)}</h3>
-                      <p>{String(body)}</p>
-                    </article>
+                    <Card key={String(title)} variant="outline" asChild>
+                      <article>
+                        <CardHeader>
+                          <Symbol
+                            size={25}
+                            strokeWidth={1.65}
+                            aria-hidden="true"
+                          />
+                          <CardTitle asChild className="principle-title">
+                            <h3>{String(title)}</h3>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <CardDescription asChild>
+                            <p>{String(body)}</p>
+                          </CardDescription>
+                        </CardContent>
+                      </article>
+                    </Card>
                   );
                 })}
               </div>
@@ -904,7 +920,7 @@ function Reference({
               <div className="install-grid">
                 <div>
                   <Badge variant="outline">@standkreis/ui · 0.1.0</Badge>
-                  <h3>
+                  <h3 className="editorial-heading">
                     {t(
                       "Install from a local package",
                       "Aus einem lokalen Paket installieren",
