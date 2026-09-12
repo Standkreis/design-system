@@ -74,7 +74,7 @@ Repeat the identical 90° arc at rotations 30°, 150° and 270° about (50, 50).
 
 The user prefers the supplied agricultural landing-page reference for its image-led colour and mood, and suggested teal 500 with white contrast. The current accent is **#14B8A6**. Shared actions use **#0B8479** with white labels to preserve readable contrast; hover is **#0F766E**. Use `primary-ink` for coloured text, and neutral supporting surfaces to let photography lead. Titillium and the selected mark remain consistent.
 
-The reference landing page adopts a panoramic photographic hero, white hero typography, generous editorial spacing and landscape/detail/human imagery. It retains the library's interactive examples below. [Imagery decisions, photo provenance and colour measurements](IMAGERY.md) record what was adopted and how it was adapted.
+The reference landing page adopts a panoramic photographic hero, white hero typography, generous editorial spacing and landscape/detail/human imagery. It keeps illustrative application compositions in the brand guide. Individual component documentation lives in a separate `/components` area with its own navigation. [Imagery decisions, photo provenance and colour measurements](IMAGERY.md) record what was adopted and how it was adapted.
 
 Still open: palette feedback, broader imagery including community activity and regional food, application integrations and rollout.
 

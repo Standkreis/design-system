@@ -52,6 +52,7 @@ test("German labels, sheet focus and reduced motion", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Switch to German" }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "de");
+  await page.goto("/components/sheet");
   await page.getByTestId("open-sheet").click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(
@@ -67,6 +68,7 @@ test("German labels, sheet focus and reduced motion", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("open-sheet")).toBeFocused();
   await page.reload();
+  await page.goto("/brand");
   await expect(page.getByTestId("identify")).toHaveText("Eine Art bestimmen");
 });
 
@@ -95,12 +97,25 @@ test("form controls and application tabs operate without data services", async (
     if (!r.url().startsWith("http://127.0.0.1:4383/")) remote.push(r.url());
   });
   await page.goto("/");
-  await page.getByLabel("Encounter name").fill("A quiet walk");
+  await page.goto("/components/input");
+  await page.getByLabel("Encounter name", { exact: true }).fill("A quiet walk");
+  await page.goto("/components/textarea");
   await page.getByLabel("What did you notice?").fill("A new detail.");
-  await page.getByRole("checkbox").check();
-  await expect(page.getByRole("checkbox")).toBeChecked();
-  await page.getByRole("switch").uncheck();
-  await expect(page.getByRole("switch")).not.toBeChecked();
+  await page.goto("/components/checkbox");
+  await page
+    .getByRole("checkbox", { name: "Keep this example private" })
+    .check();
+  await expect(
+    page.getByRole("checkbox", { name: "Keep this example private" }),
+  ).toBeChecked();
+  await page.goto("/components/switch");
+  await page
+    .getByRole("switch", { name: "Include a place in this example" })
+    .uncheck();
+  await expect(
+    page.getByRole("switch", { name: "Include a place in this example" }),
+  ).not.toBeChecked();
+  await page.goto("/brand");
   await page.getByRole("tab", { name: "Species", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Inspect a detail" }),

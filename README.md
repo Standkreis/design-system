@@ -13,7 +13,7 @@ npm ci
 npm run dev
 ```
 
-Open <http://localhost:4382>. The development command builds the library, then watches its TypeScript and styles alongside Vite. The reference app supports EN/DE and light/dark/system appearance. A manual appearance choice persists in local storage. It demonstrates real component interactions with explicitly labelled sample content; there is no camera service, data upload or persistent encounter storage.
+Open <http://localhost:4382>. The development command builds the library, then watches its TypeScript and styles alongside Vite. The preview has two areas: `/brand` for identity, imagery, application studies and principles; `/components` for setup and individual component pages with their own sidebar, live examples, usage code and API guidance. Both support direct links and browser history. The reference app supports EN/DE and light/dark/system appearance. A manual appearance choice persists in local storage. It demonstrates real component interactions with explicitly labelled sample content; there is no camera service, data upload or persistent encounter storage.
 
 ## Structure
 

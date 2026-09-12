@@ -2,7 +2,7 @@
 
 The user supplied an agricultural landing-page reference on 12 September 2026. Its strongest transferable ideas are photography as the main source of colour, white type over an atmospheric hero, restrained neutral surfaces, generous spacing, and alternating landscape/detail/human scales. The reference image itself is not redistributed in this repository.
 
-The reference app now opens with an image-led marketing study, followed by the existing interactive library documentation. The hero uses a river landscape; a portrait of planting connects the larger place to individual care. An imagery section shows the three photographic scales and explains their use in EN/DE. This is a design exploration, not a deployed marketing site.
+The brand area (`/brand`) opens with an image-led marketing study, followed by application compositions and brand guidelines. Individual component documentation lives in the separate `/components` area. The hero uses a river landscape; a portrait of planting connects the larger place to individual care. An imagery section shows the three photographic scales and explains their use in EN/DE. This is a design exploration, not a deployed marketing site.
 
 ## Adopt and adapt
 
