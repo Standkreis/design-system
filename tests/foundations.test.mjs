@@ -14,13 +14,10 @@ test("logo has three equal arcs and gaps, with an opening facing right", () => {
   const firstArcEnd = -45 + gatheredRotations[0];
   const secondArcStart = -135 + gatheredRotations[1];
   assert.equal((firstArcEnd + secondArcStart) / 2, 0);
-  const open = renderToStaticMarkup(createElement(BrandMark));
-  const dot = renderToStaticMarkup(
-    createElement(BrandMark, { variant: "dot" }),
-  );
-  assert.equal((open.match(/<path /g) || []).length, 3);
-  assert.equal((open.match(/<circle /g) || []).length, 0);
-  assert.match(dot, /<circle cx="50" cy="50" r="5"/);
+  const mark = renderToStaticMarkup(createElement(BrandMark));
+  assert.equal((mark.match(/<path /g) || []).length, 3);
+  assert.equal((mark.match(/<circle /g) || []).length, 1);
+  assert.match(mark, /<circle cx="50" cy="50" r="5"/);
 });
 
 test("brand separates product naming and escapes user-provided names", () => {
@@ -58,6 +55,8 @@ test("semantic reading and action pairs maintain contrast in both themes", async
       ["muted-foreground", "background"],
       ["muted-foreground", "card"],
       ["primary-foreground", "primary"],
+      ["primary-ink", "background"],
+      ["primary-ink", "card"],
       ["secondary-foreground", "secondary"],
       ["destructive-foreground", "destructive"],
       ["warning", "warning-surface"],
@@ -73,22 +72,15 @@ test("semantic reading and action pairs maintain contrast in both themes", async
   }
 });
 
-test("SVG downloads match component paths and rotations", async () => {
-  for (const [file, variant] of [
-    ["together.svg", "open"],
-    ["together-dot.svg", "dot"],
-  ]) {
-    const asset = await readFile(
-      new URL(`../packages/ui/assets/marks/${file}`, import.meta.url),
-      "utf8",
+test("canonical SVG download matches component paths, rotations and centre", async () => {
+  const asset = await readFile(
+    new URL("../packages/ui/assets/marks/standkreis-mark.svg", import.meta.url),
+    "utf8",
+  );
+  const rendered = renderToStaticMarkup(createElement(BrandMark));
+  const geometry = (text) =>
+    [...text.matchAll(/<(?:path|circle)\b[^>]*>/g)].map((m) =>
+      m[0].replace(/\s*\/?>$/, ">"),
     );
-    const rendered = renderToStaticMarkup(
-      createElement(BrandMark, { variant }),
-    );
-    const paths = (text) =>
-      [...text.matchAll(/<path\b[^>]*>/g)].map((m) =>
-        m[0].replace(/\s*\/?>$/, ">"),
-      );
-    assert.deepEqual(paths(asset), paths(rendered));
-  }
+  assert.deepEqual(geometry(asset), geometry(rendered));
 });

@@ -24,3 +24,5 @@ The first CLI invocation routed files through compiled package exports into `dis
 The upstream MIT notice is included in `packages/ui/THIRD_PARTY_NOTICES.md`. Preserve it when distributing source. Future CLI additions or overwrites require review: upstream defaults do not automatically satisfy Standkreis's translation, target-size and attention requirements.
 
 The pinned CLI is a development dependency. Runtime packages include Radix UI, Lucide, class-variance-authority, clsx and tailwind-merge. The shared package owns style decisions; applications extend deliberately rather than maintaining unrelated copies.
+
+The teal-400 study adds `primary-ink` for Button/Badge links and discovery feedback. Filled primary controls retain `primary-foreground`; checked switches use it for their thumb in both themes, and checked checkboxes retain a visible `primary-ink` border.
