@@ -1,0 +1,68 @@
+{
+  "name": "@standkreis/ui",
+  "version": "0.1.0",
+  "description": "Standkreis design system: shadcn/ui components, shared tokens and brand assets.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Standkreis/design-system.git",
+    "directory": "packages/ui"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "src",
+    "components.json",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "BRAND-USAGE.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js"
+    },
+    "./lib/*": {
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./fonts.css": "./assets/fonts/fonts.css",
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node ../../scripts/build-ui.mjs",
+    "watch:types": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "watch:styles": "tailwindcss -i src/styles/index.css -o dist/styles.css --watch",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
+    "radix-ui": "^1.4.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwindcss": "4.3.3",
+    "tw-animate-css": "^1.0.0"
+  }
+}
