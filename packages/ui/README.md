@@ -1,6 +1,6 @@
 # @standkreis/ui
 
-Standkreis's React design system, based on shadcn/ui. Includes accessible primitives, shared brand components, EN/DE labels, system/light/dark appearance, Titillium fonts and equal-arc logo variants.
+Standkreis's React design system, based on shadcn/ui. Includes accessible primitives, shared brand components, EN/DE labels, system/light/dark appearance, Titillium fonts and the canonical Gathered circle mark with its central dot.
 
 ```tsx
 import "@standkreis/ui/fonts.css";

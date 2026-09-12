@@ -1,14 +1,15 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("brand variants, mobile layout, colours and accessible landmarks", async ({
+test("canonical brand, mobile layout, colours and accessible landmarks", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Shared centre" }).click();
   await expect(
-    page.locator('.site-header [data-slot="brand-mark"]'),
-  ).toHaveAttribute("data-variant", "dot");
+    page.locator('.site-header [data-slot="brand-mark"] circle'),
+  ).toHaveAttribute("r", "5");
+  await expect(page.locator("#identity a[download]")).toHaveCount(1);
+  await expect(page.locator("#identity button")).toHaveCount(0);
   for (const theme of ["Light", "Dark"]) {
     await page.getByRole("combobox", { name: "Appearance" }).click();
     await page.getByRole("option", { name: theme, exact: true }).click();

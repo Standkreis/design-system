@@ -67,7 +67,7 @@ export function App() {
 
 The compiled CSS includes Tailwind's base reset and the component utilities, so consuming it requires no Tailwind build configuration. Font loading is a separate opt-in import. Applications with an existing Tailwind setup should review [integration guidance](docs/INTEGRATION.md) before importing two resets. Tokens can be imported independently through `@standkreis/ui/tokens.css`.
 
-Individual exports are available, for example `@standkreis/ui/components/button`. The package ships declarations, source maps and upstream component sources. Assets are available through `@standkreis/ui/assets/marks/together.svg` and `together-dot.svg`.
+Individual exports are available, for example `@standkreis/ui/components/button`. The package ships declarations, source maps and upstream component sources. The canonical SVG is available through `@standkreis/ui/assets/marks/standkreis-mark.svg`. Brand and BrandMark always include the central dot; they have no logo variant prop.
 
 ## Extend the library
 
@@ -100,4 +100,4 @@ CI runs both commands on pushes and pull requests. `npm run format` applies form
 - [shadcn/ui provenance and adaptations](docs/SHADCN.md)
 - [MIT implementation licence](LICENSE), [brand usage](BRAND-USAGE.md), [upstream notice](packages/ui/THIRD_PARTY_NOTICES.md), [font licence](packages/ui/assets/fonts/OFL.txt)
 
-The plain and dotted logos are both retained for review. Logo selection, broader imagery, application migrations and registry publication are later decisions.
+The Gathered circle with its central dot is selected. A fresher teal-400 primary is the current colour study; broader imagery, application migrations and registry publication remain separate work.

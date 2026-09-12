@@ -68,13 +68,11 @@ import {
   UncertaintyNotice,
   useTheme,
   type Locale,
-  type MarkVariant,
   type Theme,
 } from "@standkreis/ui";
 
 const repository = "https://github.com/Standkreis/design-system";
-import plainMark from "@standkreis/ui/assets/marks/together.svg?url";
-import dottedMark from "@standkreis/ui/assets/marks/together-dot.svg?url";
+import standkreisMark from "@standkreis/ui/assets/marks/standkreis-mark.svg?url";
 
 function Section({
   id,
@@ -112,7 +110,6 @@ function Reference({
 }) {
   const t = (en: string, de: string) => (locale === "de" ? de : en);
   const { theme, setTheme } = useTheme();
-  const [variant, setVariant] = useState<MarkVariant>("open");
   const [saved, setSaved] = useState(false);
   const [checked, setChecked] = useState(false);
   const [includePlace, setIncludePlace] = useState(true);
@@ -135,8 +132,8 @@ function Reference({
       link.rel = "icon";
       document.head.append(link);
     }
-    link.href = variant === "dot" ? dottedMark : plainMark;
-  }, [variant]);
+    link.href = standkreisMark;
+  }, []);
   const save = () => setSaved(true);
   return (
     <TooltipProvider>
@@ -152,7 +149,7 @@ function Reference({
             "Standkreis Designsystem Start",
           )}
         >
-          <Brand variant={variant} />
+          <Brand />
         </a>
         <span className="header-caption">
           {t("Design system", "Designsystem")}{" "}
@@ -208,7 +205,7 @@ function Reference({
             ))}
           </nav>
           <div className="sidebar-note">
-            <BrandMark variant={variant} width={48} height={48} />
+            <BrandMark width={48} height={48} />
             <p>
               {t(
                 "Different rooms.\nThe same place.",
@@ -264,7 +261,6 @@ function Reference({
                         ? "Species"
                         : "Community"
                   }
-                  variant={variant}
                 />
                 <Badge variant="outline">
                   {t("Component example", "Komponentenbeispiel")}
@@ -337,7 +333,7 @@ function Reference({
                         {t("A quiet beginning", "Ein ruhiger Anfang")}
                       </span>
                       <div className="field-symbol">
-                        <BrandMark variant={variant} width={150} height={150} />
+                        <BrandMark width={150} height={150} />
                       </div>
                       <div>
                         <span className="field-caption">
@@ -484,48 +480,24 @@ function Reference({
             number="01"
             title={t("Gathered around a place.", "Gemeinsam um einen Ort.")}
             description={t(
-              "Three equal arcs and three equal gaps. One opening faces right. The central dot is an optional variant; the final choice remains open.",
-              "Drei gleiche Bögen und drei gleiche Abstände. Eine Öffnung zeigt nach rechts. Der Mittelpunkt ist eine optionale Variante; die endgültige Wahl bleibt offen.",
+              "The Standkreis mark: three equal arcs, three equal gaps and one shared centre. One opening faces right.",
+              "Das Standkreis-Zeichen: drei gleiche Bögen, drei gleiche Abstände und eine gemeinsame Mitte. Eine Öffnung zeigt nach rechts.",
             )}
           >
-            <div className="logo-comparison">
-              {(["open", "dot"] as const).map((value) => (
-                <button
-                  key={value}
-                  className="logo-choice"
-                  data-selected={variant === value}
-                  onClick={() => setVariant(value)}
-                  aria-pressed={variant === value}
-                >
-                  <span>
-                    {value === "open"
-                      ? t("Open centre", "Offene Mitte")
-                      : t("Shared centre", "Gemeinsame Mitte")}
-                  </span>
-                  <BrandMark variant={value} width={118} height={118} />
-                  <small>
-                    {value === variant
-                      ? t(
-                          "Selected in this reference",
-                          "In dieser Referenz ausgewählt",
-                        )
-                      : t("Preview this variant", "Diese Variante ansehen")}
-                  </small>
-                </button>
-              ))}
+            <div className="logo-specimens">
+              <div className="logo-primary">
+                <span>{t("Gathered circle", "Gemeinsamer Kreis")}</span>
+                <BrandMark width={118} height={118} />
+                <small>{t("One shared centre", "Eine gemeinsame Mitte")}</small>
+              </div>
               <div className="logo-inverse">
-                <Brand variant={variant} product="Atlas" />
+                <Brand product="Atlas" />
                 <div className="small-marks">
                   {[16, 24, 36, 48].map((size) => (
-                    <BrandMark
-                      key={size}
-                      variant={variant}
-                      width={size}
-                      height={size}
-                    />
+                    <BrandMark key={size} width={size} height={size} />
                   ))}
                 </div>
-                <a href={variant === "dot" ? dottedMark : plainMark} download>
+                <a href={standkreisMark} download>
                   {t("Download SVG", "SVG herunterladen")}{" "}
                   <ArrowRight size={16} aria-hidden="true" />
                 </a>
@@ -541,8 +513,8 @@ function Reference({
               "Ruhige Flächen. Menschlicher Charakter.",
             )}
             description={t(
-              "Gathered circle colours meet Titillium Web. Semantic tokens keep meaning consistent across light and dark appearances.",
-              "Die Farben des gemeinsamen Kreises treffen auf Titillium Web. Semantische Tokens halten Bedeutungen in heller und dunkler Darstellung konsistent.",
+              "A fresher teal-400 colour study, paired with Titillium Web. Bright action surfaces, deep teal text and quiet mint accents in both themes.",
+              "Eine frischere Farbstudie in Richtung Teal 400, kombiniert mit Titillium Web. Leuchtende Aktionsflächen, tiefes Türkis für Text und ruhige Mint-Akzente in beiden Darstellungen.",
             )}
           >
             <div className="swatch-grid">
@@ -814,7 +786,7 @@ function Reference({
                         </SheetDescription>
                       </SheetHeader>
                       <div className="sheet-body">
-                        <BrandMark width={92} height={92} variant={variant} />
+                        <BrandMark width={92} height={92} />
                         <p>
                           {t(
                             "Focus returns to the opening control when you close this panel.",
@@ -939,7 +911,7 @@ function Reference({
             </div>
           </Section>
           <footer className="site-footer">
-            <Brand variant={variant} />
+            <Brand />
             <p>
               {t(
                 "Explore nature. Shape thriving ecosystems together.",

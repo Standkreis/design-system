@@ -1,6 +1,6 @@
 # Standkreis — agreed direction
 
-Captured from the branding conversation on 12 September 2026. The user subsequently authorised this shared design-system repository, based on shadcn/ui. The Gathered circle direction guides the first implementation; both logo variants remain available pending a final choice.
+Captured from the branding conversation on 12 September 2026. The user subsequently authorised this shared design-system repository, based on shadcn/ui. The Gathered circle with its central dot is the selected mark.
 
 ## Purpose and origin
 
@@ -16,7 +16,7 @@ Desired outcomes include more trees, biomass and species diversity; more natural
 - Species's light canvas and turquoise are the visual starting point. Clean, minimal, futuristic, with careful motion.
 - Titillium Web remains the lead typeface for its perceived organic/human character and versatility. Alternatives remain possible but are not required for the first study.
 - Logo may be abstract. Circle-led exploration should draw from place, shared commitment and participation. Invitation is preferred without forcing the mark to explain every part of the story.
-- Existing GitHub identity combines a tree and compass needle with overlapping circles. Existing Atlas identity uses an open circle and central dot. Both are references; logo exploration is reopened.
+- Existing GitHub identity combines a tree and compass needle with overlapping circles. Existing Atlas identity uses an open circle and central dot. Both informed the exploration; the selected mark is the Gathered circle with its central dot.
 - Community names, imagery and optional emblems can express local identity. Fonts and interface colours remain consistent for now.
 
 ## People
@@ -64,19 +64,19 @@ Open source is welcome; optimise for Standkreis first. Code licence and name/log
 
 Success criteria: **coherence, consistency, smooth motion, delightful experiences**.
 
-## Immediate scope
+## Selected mark
 
-Explore logo, colours, typography, imagery, icons and a few basic components in light and dark mode before rebuilding applications or implementing the actual design system. No additional user-provided references are needed.
+The user selected the middle direction, Gathered circle, with the circle in the centre and requested removal of the alternatives. This is now the only mark in the library and reference app.
 
-First spike holds content and Titillium constant while varying mark, palette temperature, geometry, framing and motion duration. All three directions must be compared across both Atlas and Species specimens. These are local standalone HTML/CSS/JS studies, not production functionality.
+Repeat the identical 90° arc at rotations 30°, 150° and 270° about (50, 50). Radius 36, stroke width 10, identical round caps and equal 30° centreline gaps. One gap is centred at 3 o’clock. The central dot has radius 5. Keep this geometry identical in React and the exported SVG. Do not animate the mark as a loading indicator.
 
-Still open: final mark/palette, broader imagery selection including people and food/water contexts, typeface comparison if needed, component scope, packaging/versioning, licensing and rollout. This study does not select a winner automatically.
+## Current colour exploration
 
-## First visual feedback
+The user requested a fresher primary towards [Tailwind teal 400](https://tailwindcss.com/docs/colors). The current study uses **#2DD4BF**, with **#123B36** labels, in both light and dark mode. This is a colour exploration, not a final palette decision.
 
-The user prefers direction 02, Gathered circle, as a direction for further work. Its three pieces must be exactly equal in size and spacing. Add a second version with the same three arcs and a central dot. Neither variant has yet been selected as the final logo.
+Use `primary` for filled action surfaces and `primary-foreground` for their content. Bright teal is too light for body text on a light canvas: use `primary-ink` (**#0F766E** in light mode, **#5EEAD4** in dark mode) for links and coloured text. Focus rings use the deeper/lightened reading colour for their theme. Soft mint accents and quiet green neutrals support the brighter primary. Titillium remains consistent.
 
-Further logo refinement: orient one opening directly to the right in both variants. Preserve the equal arcs and gaps; the centre dot remains fixed.
+Still open: palette feedback, broader imagery including people and food/water contexts, application integrations and rollout.
 
 ## Implementation authorization
 

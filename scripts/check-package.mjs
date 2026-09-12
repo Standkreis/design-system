@@ -43,8 +43,7 @@ try {
     "assets/fonts/fonts.css",
     "assets/fonts/OFL.txt",
     "assets/fonts/TitilliumWeb-Italic.woff2",
-    "assets/marks/together.svg",
-    "assets/marks/together-dot.svg",
+    "assets/marks/standkreis-mark.svg",
     "LICENSE",
     "BRAND-USAGE.md",
     "THIRD_PARTY_NOTICES.md",
@@ -52,6 +51,11 @@ try {
     if (!contents.includes(required))
       throw new Error(`Package missing ${required}`);
   }
+  if (
+    contents.filter((file) => file.startsWith("assets/marks/")).join() !==
+    "assets/marks/standkreis-mark.svg"
+  )
+    throw new Error("Package must contain only the canonical Standkreis mark");
   if (contents.some((file) => /\.env|\.jpg|\.png|node_modules/.test(file)))
     throw new Error("Unexpected private/runtime artifacts in package");
   await writeFile(

@@ -2,19 +2,12 @@ import type { ComponentProps } from "react";
 import { cn } from "../lib/utils.js";
 import { gatheredArc, gatheredRotations } from "./geometry.js";
 
-export type MarkVariant = "open" | "dot";
 export type BrandMarkProps = ComponentProps<"svg"> & {
-  variant?: MarkVariant;
   label?: string;
 };
 
 /** Decorative unless an accessible label is supplied. Does not imply product identity. */
-export function BrandMark({
-  variant = "open",
-  label,
-  className,
-  ...props
-}: BrandMarkProps) {
+export function BrandMark({ label, className, ...props }: BrandMarkProps) {
   return (
     <svg
       width="32"
@@ -28,7 +21,6 @@ export function BrandMark({
       aria-hidden={label ? undefined : true}
       focusable="false"
       data-slot="brand-mark"
-      data-variant={variant}
     >
       <g stroke="currentColor" strokeWidth="10" strokeLinecap="round">
         {gatheredRotations.map((angle) => (
@@ -39,18 +31,15 @@ export function BrandMark({
           />
         ))}
       </g>
-      {variant === "dot" && (
-        <circle cx="50" cy="50" r="5" fill="currentColor" />
-      )}
+      <circle cx="50" cy="50" r="5" fill="currentColor" />
     </svg>
   );
 }
 
 export type BrandProps = ComponentProps<"span"> & {
   product?: string;
-  variant?: MarkVariant;
 };
-export function Brand({ product, variant, className, ...props }: BrandProps) {
+export function Brand({ product, className, ...props }: BrandProps) {
   return (
     <span
       {...props}
@@ -60,7 +49,7 @@ export function Brand({ product, variant, className, ...props }: BrandProps) {
       )}
       data-slot="brand"
     >
-      <BrandMark variant={variant} />
+      <BrandMark />
       <span className="font-semibold tracking-tight">Standkreis</span>
       {product && <span className="-ml-0.5 font-normal">{product}</span>}
     </span>

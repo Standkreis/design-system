@@ -31,3 +31,9 @@ Specialised content canvases may retain their own background when needed for vis
 ## Rollout
 
 No existing application was migrated during repository creation. First integrate a small Atlas flow and a Species control panel in separate application changes, verify the same package in both, and use that evidence to extend the shared library. Keep provisional product names configurable; only Atlas is settled.
+
+## Canonical identity and colour roles
+
+Use `<Brand />` or `<BrandMark />`; the centre dot is always included. The former `variant` prop and candidate SVG paths were removed before npm publication. Replace either candidate asset with `@standkreis/ui/assets/marks/standkreis-mark.svg`.
+
+The current teal study distinguishes filled actions (`bg-primary text-primary-foreground`) from readable coloured text (`text-primary-ink`). Do not use `text-primary` for light-mode body text. Both roles are available in the shared tokens and Tailwind theme.
