@@ -124,21 +124,14 @@ html {
 }
 .section-heading {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr);
   margin-bottom: 28px;
-  align-items: end;
 }
 .section-heading .eyebrow {
   margin-bottom: 12px;
 }
 .section-heading h2 {
   font-size: clamp(29px, 3vw, 40px);
-}
-.section-heading > p {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--muted-foreground);
 }
 .logo-specimens {
   display: grid;
@@ -445,9 +438,6 @@ html {
   }
   .section-heading h2 {
     font-size: 32px;
-  }
-  .section-heading > p {
-    font-size: 16px;
   }
   .logo-specimens {
     gap: 10px;
@@ -1389,5 +1379,36 @@ html {
   }
   .motion-example-content .button-row > button {
     white-space: normal;
+  }
+}
+
+.status-colours {
+  margin-top: 36px;
+}
+.status-colour-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.status-colour-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.status-colour-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.status-token-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .status-colour-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

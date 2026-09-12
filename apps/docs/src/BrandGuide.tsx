@@ -45,6 +45,8 @@ import {
   UncertaintyNotice,
   type Locale,
 } from "@standkreis/ui";
+import { brandChapterTitle, type BrandChapterId } from "./brand-chapters";
+import { StatusColours } from "./StatusColours";
 import { MotionStudy } from "./MotionStudy";
 import { SpatialStudy } from "./SpatialStudy";
 import { ImageryStudy } from "./LandingStudy";
@@ -53,14 +55,12 @@ import standkreisMark from "@standkreis/ui/assets/marks/standkreis-mark.svg?url"
 function Section({
   id,
   number,
-  title,
-  description,
+  locale,
   children,
 }: {
-  id: string;
+  id: BrandChapterId;
   number: string;
-  title: string;
-  description: string;
+  locale: Locale;
   children: ReactNode;
 }) {
   return (
@@ -69,10 +69,9 @@ function Section({
         <div>
           <span className="eyebrow">{number} / STANDKREIS</span>
           <h2 className="editorial-heading" id={`${id}-title`}>
-            {title}
+            {brandChapterTitle(id, locale)}
           </h2>
         </div>
-        <p>{description}</p>
       </div>
       {children}
     </section>
@@ -93,22 +92,11 @@ export function BrandGuide({ locale }: { locale: Locale }) {
       >
         <div className="section-heading">
           <div>
-            <span className="eyebrow">
-              {t("A shared foundation", "Eine gemeinsame Grundlage")}
-            </span>
-            <h2 className="editorial-heading">
-              {t(
-                "Different rooms. The same place.",
-                "Verschiedene Räume. Derselbe Ort.",
-              )}
+            <span className="eyebrow">00 / STANDKREIS</span>
+            <h2 className="editorial-heading" id="applications-title">
+              {brandChapterTitle("applications", locale)}
             </h2>
           </div>
-          <p>
-            {t(
-              "The imagery sets the scene. Familiar controls make it easy to explore, learn and contribute across every application.",
-              "Die Bilder schaffen den Rahmen. Vertraute Bedienelemente machen es leicht, in jeder Anwendung zu entdecken, zu lernen und mitzumachen.",
-            )}
-          </p>
         </div>
         <Card variant="default" className="application-example">
           <div className="application-top">
@@ -324,15 +312,7 @@ export function BrandGuide({ locale }: { locale: Locale }) {
       </section>
 
       <div id="identity">
-        <Section
-          id="logo"
-          number="01"
-          title={t("Logo", "Logo")}
-          description={t(
-            "The Standkreis mark: three equal arcs, three equal gaps and one shared centre. One opening faces right.",
-            "Das Standkreis-Zeichen: drei gleiche Bögen, drei gleiche Abstände und eine gemeinsame Mitte. Eine Öffnung zeigt nach rechts.",
-          )}
-        >
+        <Section locale={locale} id="logo" number="01">
           <div className="logo-specimens">
             <Card variant="primary" className="logo-primary">
               <span>{t("Gathered circle", "Gemeinsamer Kreis")}</span>
@@ -355,15 +335,7 @@ export function BrandGuide({ locale }: { locale: Locale }) {
         </Section>
       </div>
 
-      <Section
-        id="colour"
-        number="02"
-        title={t("Colours", "Farben")}
-        description={t(
-          "Teal 500 gives the brand a fresh accent. A deeper action shade supports white labels. Neutral surfaces let photography carry the colour, with Titillium Web throughout.",
-          "Teal 500 gibt der Marke einen frischen Akzent. Ein tieferer Aktionston trägt weiße Beschriftungen. Neutrale Flächen lassen den Fotografien ihre Farben, mit Titillium Web als gemeinsamer Schrift.",
-        )}
-      >
+      <Section locale={locale} id="colour" number="02">
         <div className="swatch-grid">
           {[
             ["background", t("Canvas", "Hintergrund")],
@@ -371,7 +343,7 @@ export function BrandGuide({ locale }: { locale: Locale }) {
             ["foreground", t("Ink", "Text")],
             ["primary", t("Action", "Aktion")],
             ["brand-turquoise", t("Brand / teal 500", "Marke / Teal 500")],
-            ["warning", t("Uncertainty", "Unsicherheit")],
+            ["secondary", t("Secondary", "Sekundär")],
           ].map(([token, title]) => (
             <div className="swatch" key={token}>
               <div style={{ background: `var(--${token})` }} />
@@ -380,16 +352,9 @@ export function BrandGuide({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
+        <StatusColours locale={locale} />
       </Section>
-      <Section
-        id="typography"
-        number="03"
-        title={t("Typography", "Typografie")}
-        description={t(
-          "Titillium Web brings a human character to headlines, reading and controls. Use the same family across every application.",
-          "Titillium Web gibt Überschriften, Lesetext und Bedienelementen einen menschlichen Charakter. Nutze dieselbe Schriftfamilie in jeder Anwendung.",
-        )}
-      >
+      <Section locale={locale} id="typography" number="03">
         <Card variant="default" className="type-specimen">
           <div>
             <span className="eyebrow">TITILLIUM WEB / 600</span>
@@ -421,15 +386,7 @@ export function BrandGuide({ locale }: { locale: Locale }) {
           </div>
         </Card>
       </Section>
-      <Section
-        id="icons"
-        number="04"
-        title={t("Icons", "Icons")}
-        description={t(
-          "Lucide line icons give familiar actions a consistent shape. Keep symbols simple and pair unfamiliar actions with a visible label.",
-          "Lucide-Linienicons geben vertrauten Aktionen eine einheitliche Form. Halte Symbole einfach und kombiniere unbekannte Aktionen mit einer sichtbaren Beschriftung.",
-        )}
-      >
+      <Section locale={locale} id="icons" number="04">
         <div className="icon-row">
           {[
             [ScanLine, t("Identify", "Bestimmen")],
@@ -480,39 +437,15 @@ export function BrandGuide({ locale }: { locale: Locale }) {
         </div>
       </Section>
 
-      <Section
-        id="imagery"
-        number="05"
-        title={t("Life brings the colour.", "Das Leben bringt die Farbe.")}
-        description={t(
-          "A landscape, a small detail, a moment of care. Photography gives the shared identity warmth and a sense of place.",
-          "Eine Landschaft, ein kleines Detail, ein Moment der Fürsorge. Fotografie gibt der gemeinsamen Identität Wärme und ein Gefühl für den Ort.",
-        )}
-      >
+      <Section locale={locale} id="imagery" number="05">
         <ImageryStudy locale={locale} />
       </Section>
 
-      <Section
-        id="spatial"
-        number="06"
-        title={t("3D & spatial design", "3D & räumliche Gestaltung")}
-        description={t(
-          "Make relationships tangible: a place, the layers of a forest garden or the structure of a plant. Low-poly illustration is a shared direction for area overviews and imagining possibilities.",
-          "Mache Zusammenhänge greifbar: einen Ort, die Schichten eines Waldgartens oder den Aufbau einer Pflanze. Low-Poly-Illustration ist eine gemeinsame Richtung für Flächenübersichten und das Entwerfen von Möglichkeiten.",
-        )}
-      >
+      <Section locale={locale} id="spatial" number="06">
         <SpatialStudy locale={locale} />
       </Section>
 
-      <Section
-        id="patterns"
-        number="07"
-        title={t("Helpful through uncertainty.", "Hilfreich bei Unsicherheit.")}
-        description={t(
-          "Explain what is known. Offer a next step without pressure. Keep the same clear, encouraging voice in English and German.",
-          "Erkläre, was bekannt ist. Biete ohne Druck einen nächsten Schritt an. Bewahre dieselbe klare, ermutigende Sprache auf Englisch und Deutsch.",
-        )}
-      >
+      <Section locale={locale} id="patterns" number="07">
         <div className="pattern-grid">
           <div>
             <UncertaintyNotice />
@@ -556,27 +489,11 @@ export function BrandGuide({ locale }: { locale: Locale }) {
         </div>
       </Section>
 
-      <Section
-        id="motion"
-        number="08"
-        title={t("Motion", "Bewegung")}
-        description={t(
-          "A response to your curiosity, never a request for your attention. Motion connects an action to its result and helps you keep your place.",
-          "Eine Antwort auf deine Neugier, niemals eine Forderung nach deiner Aufmerksamkeit. Bewegung verbindet eine Aktion mit ihrem Ergebnis und hilft dir, die Orientierung zu behalten.",
-        )}
-      >
+      <Section locale={locale} id="motion" number="08">
         <MotionStudy locale={locale} />
       </Section>
 
-      <Section
-        id="guidance"
-        number="09"
-        title={t("Built around care.", "Für ein achtsames Miteinander.")}
-        description={t(
-          "The system carries more than colours. These principles guide what we build and how it behaves.",
-          "Das System vermittelt mehr als Farben. Diese Prinzipien leiten, was wir bauen und wie es sich verhält.",
-        )}
-      >
+      <Section locale={locale} id="guidance" number="09">
         <div className="principle-grid">
           {[
             [

@@ -63,7 +63,11 @@ test("semantic reading and action pairs maintain contrast in both themes", async
       ["inverse-action-foreground", "inverse-action"],
       ["inverse-action-foreground", "inverse-action-hover"],
       ["destructive-foreground", "destructive"],
-      ["warning", "warning-surface"],
+      ...["info", "success", "error", "warning"].flatMap((status) => [
+        [status, `${status}-surface`],
+        [status, "background"],
+        [status, "card"],
+      ]),
     ]) {
       const a = luminance(tokens[foreground]),
         b = luminance(tokens[background]);

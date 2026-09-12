@@ -184,38 +184,48 @@ function Demo({ slug, t }: { slug: string; t: Translate }) {
     case "card":
       return (
         <div className="card-demo-grid">
-          {(["default", "soft", "outline", "primary", "inverse"] as const).map(
-            (variant) => (
-              <Card key={variant} variant={variant} asChild>
-                <article>
-                  <CardHeader>
-                    <CardTitle asChild>
-                      <h3>{variant}</h3>
-                    </CardTitle>
-                    <CardDescription>
-                      {t(
-                        "A shared surface, in every application.",
-                        "Eine gemeinsame Fläche, in jeder Anwendung.",
-                      )}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>
-                      {t(
-                        "Space for a thought, an observation or a next step.",
-                        "Raum für einen Gedanken, eine Beobachtung oder einen nächsten Schritt.",
-                      )}
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <span>
-                      {t("Standkreis · Example", "Standkreis · Beispiel")}
-                    </span>
-                  </CardFooter>
-                </article>
-              </Card>
-            ),
-          )}
+          {(
+            [
+              "default",
+              "soft",
+              "outline",
+              "primary",
+              "inverse",
+              "info",
+              "success",
+              "error",
+              "warning",
+            ] as const
+          ).map((variant) => (
+            <Card key={variant} variant={variant} asChild>
+              <article>
+                <CardHeader>
+                  <CardTitle asChild>
+                    <h3>{variant}</h3>
+                  </CardTitle>
+                  <CardDescription>
+                    {t(
+                      "A shared surface, in every application.",
+                      "Eine gemeinsame Fläche, in jeder Anwendung.",
+                    )}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>
+                    {t(
+                      "Space for a thought, an observation or a next step.",
+                      "Raum für einen Gedanken, eine Beobachtung oder einen nächsten Schritt.",
+                    )}
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <span>
+                    {t("Standkreis · Example", "Standkreis · Beispiel")}
+                  </span>
+                </CardFooter>
+              </article>
+            </Card>
+          ))}
         </div>
       );
     case "input":

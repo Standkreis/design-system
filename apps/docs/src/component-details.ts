@@ -135,7 +135,7 @@ export function componentDetails(t: Translate): Record<string, Detail> {
       props: [
         [
           "Card.variant",
-          "default | soft | outline | primary | inverse",
+          "default | soft | outline | primary | inverse | info | success | error | warning",
           t(
             "Default: default. Surface colours and descriptions follow shared tokens.",
             "Standard: default. Flächenfarben und Beschreibungen folgen gemeinsamen Tokens.",

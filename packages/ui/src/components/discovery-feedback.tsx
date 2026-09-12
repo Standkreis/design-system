@@ -19,7 +19,7 @@ export function DiscoveryFeedback({
       aria-live="polite"
       aria-atomic="true"
       className={cn(
-        "flex min-h-7 items-start gap-2 text-sm text-primary-ink",
+        "flex min-h-7 items-start gap-2 text-sm text-success",
         className,
       )}
       data-slot="discovery-feedback"

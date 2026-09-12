@@ -21,6 +21,7 @@ import {
   type Theme,
 } from "@standkreis/ui";
 import standkreisMark from "@standkreis/ui/assets/marks/standkreis-mark.svg?url";
+import { brandChapters } from "./brand-chapters";
 import { LandingStudy } from "./LandingStudy";
 import { BrandGuide } from "./BrandGuide";
 import { ComponentDocs, componentCatalog } from "./ComponentDocs";
@@ -59,19 +60,10 @@ function Reference({
     document.title = `${components ? (current?.name ?? t("Components", "Komponenten")) : t("Brand guide", "Markenrichtlinien")} · Standkreis`;
   }, [components, current, locale]);
   const [activeBrandSection, setActiveBrandSection] = useState("overview");
-  const sections = [
-    ["overview", t("Overview", "Überblick")],
-    ["applications", t("Applications", "Anwendungen")],
-    ["logo", t("Logo", "Logo")],
-    ["colour", t("Colours", "Farben")],
-    ["typography", t("Typography", "Typografie")],
-    ["icons", t("Icons", "Icons")],
-    ["imagery", t("Imagery", "Bildsprache")],
-    ["spatial", t("3D & space", "3D & Raum")],
-    ["patterns", t("Voice", "Sprache")],
-    ["motion", t("Motion", "Bewegung")],
-    ["guidance", t("Principles", "Prinzipien")],
-  ];
+  const sections = brandChapters.map((chapter) => [
+    chapter.id,
+    chapter[locale],
+  ]);
   useEffect(() => {
     if (components) return;
     let frame = 0;
@@ -79,19 +71,7 @@ function Reference({
       const edge =
         (document.querySelector(".site-header")?.getBoundingClientRect()
           .bottom ?? 0) + 64;
-      const ids = [
-        "overview",
-        "applications",
-        "logo",
-        "colour",
-        "typography",
-        "icons",
-        "imagery",
-        "spatial",
-        "patterns",
-        "motion",
-        "guidance",
-      ];
+      const ids = brandChapters.map((chapter) => chapter.id);
       const current = ids
         .filter((id) => {
           const section = document.getElementById(id);
