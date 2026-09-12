@@ -96,8 +96,9 @@ CI runs both commands on pushes and pull requests. `npm run format` applies form
 ## Decisions and licences
 
 - [Brand principles and conversation decisions](docs/BRAND.md)
+- [Imagery direction and photo provenance](docs/IMAGERY.md)
 - [Integration, theme setup and migration boundaries](docs/INTEGRATION.md)
 - [shadcn/ui provenance and adaptations](docs/SHADCN.md)
 - [MIT implementation licence](LICENSE), [brand usage](BRAND-USAGE.md), [upstream notice](packages/ui/THIRD_PARTY_NOTICES.md), [font licence](packages/ui/assets/fonts/OFL.txt)
 
-The Gathered circle with its central dot is selected. A fresher teal-400 primary is the current colour study; broader imagery, application migrations and registry publication remain separate work.
+The Gathered circle with its central dot is selected. The current study pairs teal 500 accents and deeper white-labelled actions with an image-led landing page. Application migrations and registry publication remain separate work.

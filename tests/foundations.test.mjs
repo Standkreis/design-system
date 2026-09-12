@@ -55,6 +55,7 @@ test("semantic reading and action pairs maintain contrast in both themes", async
       ["muted-foreground", "background"],
       ["muted-foreground", "card"],
       ["primary-foreground", "primary"],
+      ["primary-foreground", "primary-hover"],
       ["primary-ink", "background"],
       ["primary-ink", "card"],
       ["secondary-foreground", "secondary"],

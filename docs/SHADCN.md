@@ -26,3 +26,5 @@ The upstream MIT notice is included in `packages/ui/THIRD_PARTY_NOTICES.md`. Pre
 The pinned CLI is a development dependency. Runtime packages include Radix UI, Lucide, class-variance-authority, clsx and tailwind-merge. The shared package owns style decisions; applications extend deliberately rather than maintaining unrelated copies.
 
 The teal-400 study adds `primary-ink` for Button/Badge links and discovery feedback. Filled primary controls retain `primary-foreground`; checked switches use it for their thumb in both themes, and checked checkboxes retain a visible `primary-ink` border.
+
+The imagery-led study changes primary labels to white and adds an opaque `primary-hover` token for Button and Badge. This prevents hover transparency from reducing label contrast on light backgrounds. The white rounded hero CTA is an intentional local marketing treatment using the shared Button.

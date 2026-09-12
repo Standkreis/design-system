@@ -111,3 +111,35 @@ test("form controls and application tabs operate without data services", async (
   ).toBeVisible();
   expect(remote).toEqual([]);
 });
+
+test("photographic landing loads locally and remains usable in German", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".hero-photograph")).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator(".hero-photograph")
+        .evaluate((img: HTMLImageElement) => img.naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await page
+    .getByRole("link", { name: "Explore the foundations", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#identity$/);
+  await page.getByRole("button", { name: "Switch to German" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Der Natur näher.",
+  );
+  for (const photo of await page.locator("#imagery img").all()) {
+    await photo.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => photo.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+  await page.evaluate(() => document.fonts.ready);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(page.viewportSize()!.width);
+});
