@@ -11,3 +11,5 @@
 - `shadcn add accordion --dry-run --cwd packages/ui` resolved the target to `src/components/accordion.tsx`; it made no changes. This confirms future CLI additions target source rather than build output.
 
 No physical phone, Safari/Firefox, production Atlas/Species integration, scientific data service, npm registry publication or hosted deployment was part of this initial release.
+
+The first GitHub CI run exposed a clean-checkout ordering defect: the reference app's typecheck needs the library's emitted declarations. `typecheck` now emits those declarations before checking the app. The full check was repeated after deleting both build-output directories to verify the correction without relying on local artifacts.
