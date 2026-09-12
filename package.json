@@ -15,7 +15,7 @@
     "watch:styles": "npm run watch:styles -w @standkreis/ui",
     "watch:docs": "npm run dev -w @standkreis/docs",
     "build": "npm run build -w @standkreis/ui && npm run build -w @standkreis/docs",
-    "typecheck": "tsc -p packages/ui/tsconfig.json --noEmit && tsc -p apps/docs/tsconfig.json",
+    "typecheck": "tsc -p packages/ui/tsconfig.json --emitDeclarationOnly && tsc -p apps/docs/tsconfig.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "node --test tests/*.test.mjs",
