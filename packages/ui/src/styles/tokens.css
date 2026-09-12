@@ -1,19 +1,20 @@
 :root {
   color-scheme: light;
-  --background: #f5f8f7;
+  --background: #f7f8f5;
   --foreground: #243b37;
   --card: #ffffff;
   --card-foreground: #243b37;
   --popover: #ffffff;
   --popover-foreground: #243b37;
-  --primary: #2dd4bf;
+  --primary: #0b8479;
+  --primary-hover: #0f766e;
   --primary-ink: #0f766e;
-  --primary-foreground: #123b36;
-  --secondary: #dff5ef;
+  --primary-foreground: #ffffff;
+  --secondary: #edf0e9;
   --secondary-foreground: #243b37;
-  --muted: #edf3f0;
+  --muted: #edf0e9;
   --muted-foreground: #526c65;
-  --accent: #dff5ef;
+  --accent: #edf0e9;
   --accent-foreground: #243b37;
   --destructive: #b42318;
   --destructive-foreground: #ffffff;
@@ -22,7 +23,7 @@
   --border: #d5e2dc;
   --input: #859889;
   --ring: #0f766e;
-  --brand-turquoise: #2dd4bf;
+  --brand-turquoise: #14b8a6;
   --radius: 1rem;
   --font-standkreis: "Titillium Web", ui-sans-serif, system-ui, sans-serif;
   --motion-fast: 160ms;
@@ -33,20 +34,21 @@
 
 .dark {
   color-scheme: dark;
-  --background: #101d1b;
+  --background: #111713;
   --foreground: #eef2e8;
-  --card: #192b27;
+  --card: #1b241e;
   --card-foreground: #eef2e8;
-  --popover: #192b27;
+  --popover: #1b241e;
   --popover-foreground: #eef2e8;
-  --primary: #2dd4bf;
+  --primary: #0b8479;
+  --primary-hover: #0f766e;
   --primary-ink: #5eead4;
-  --primary-foreground: #123b36;
-  --secondary: #23443c;
+  --primary-foreground: #ffffff;
+  --secondary: #28342b;
   --secondary-foreground: #eef2e8;
-  --muted: #213831;
+  --muted: #253027;
   --muted-foreground: #b6cbc2;
-  --accent: #23443c;
+  --accent: #28342b;
   --accent-foreground: #eef2e8;
   --destructive: #ffb4a8;
   --destructive-foreground: #35120e;
@@ -55,5 +57,5 @@
   --border: #38534a;
   --input: #778d76;
   --ring: #5eead4;
-  --brand-turquoise: #2dd4bf;
+  --brand-turquoise: #14b8a6;
 }

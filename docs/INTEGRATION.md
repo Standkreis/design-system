@@ -36,4 +36,6 @@ No existing application was migrated during repository creation. First integrate
 
 Use `<Brand />` or `<BrandMark />`; the centre dot is always included. The former `variant` prop and candidate SVG paths were removed before npm publication. Replace either candidate asset with `@standkreis/ui/assets/marks/standkreis-mark.svg`.
 
-The current teal study distinguishes filled actions (`bg-primary text-primary-foreground`) from readable coloured text (`text-primary-ink`). Do not use `text-primary` for light-mode body text. Both roles are available in the shared tokens and Tailwind theme.
+The current teal study uses white labels on a deeper action shade and distinguishes filled actions (`bg-primary text-primary-foreground`) from readable coloured text (`text-primary-ink`). Do not use `text-primary` for light-mode body text. Both roles are available in the shared tokens and Tailwind theme.
+
+`primary-hover` preserves white-label contrast on hover. Use the opaque hover colour instead of reducing primary opacity. Marketing photographs belong to the reference app and are not bundled into the UI package.

@@ -70,13 +70,13 @@ The user selected the middle direction, Gathered circle, with the circle in the 
 
 Repeat the identical 90° arc at rotations 30°, 150° and 270° about (50, 50). Radius 36, stroke width 10, identical round caps and equal 30° centreline gaps. One gap is centred at 3 o’clock. The central dot has radius 5. Keep this geometry identical in React and the exported SVG. Do not animate the mark as a loading indicator.
 
-## Current colour exploration
+## Current colour and imagery exploration
 
-The user requested a fresher primary towards [Tailwind teal 400](https://tailwindcss.com/docs/colors). The current study uses **#2DD4BF**, with **#123B36** labels, in both light and dark mode. This is a colour exploration, not a final palette decision.
+The user prefers the supplied agricultural landing-page reference for its image-led colour and mood, and suggested teal 500 with white contrast. The current accent is **#14B8A6**. Shared actions use **#0B8479** with white labels to preserve readable contrast; hover is **#0F766E**. Use `primary-ink` for coloured text, and neutral supporting surfaces to let photography lead. Titillium and the selected mark remain consistent.
 
-Use `primary` for filled action surfaces and `primary-foreground` for their content. Bright teal is too light for body text on a light canvas: use `primary-ink` (**#0F766E** in light mode, **#5EEAD4** in dark mode) for links and coloured text. Focus rings use the deeper/lightened reading colour for their theme. Soft mint accents and quiet green neutrals support the brighter primary. Titillium remains consistent.
+The reference landing page adopts a panoramic photographic hero, white hero typography, generous editorial spacing and landscape/detail/human imagery. It retains the library's interactive examples below. [Imagery decisions, photo provenance and colour measurements](IMAGERY.md) record what was adopted and how it was adapted.
 
-Still open: palette feedback, broader imagery including people and food/water contexts, application integrations and rollout.
+Still open: palette feedback, broader imagery including community activity and regional food, application integrations and rollout.
 
 ## Implementation authorization
 
