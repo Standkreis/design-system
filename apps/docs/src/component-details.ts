@@ -398,6 +398,14 @@ export function componentDetails(t: Translate): Record<string, Detail> {
           t("Receives the selected value.", "Erhält den ausgewählten Wert."),
         ],
         [
+          "SelectTrigger.size",
+          "default | sm | icon",
+          t(
+            "Icon uses a 44px square trigger without a chevron. Supply an accessible name and current value.",
+            "Icon nutzt einen quadratischen 44-px-Auslöser ohne Chevron. Stelle einen zugänglichen Namen und den aktuellen Wert bereit.",
+          ),
+        ],
+        [
           "SelectItem.value",
           "non-empty string",
           t(

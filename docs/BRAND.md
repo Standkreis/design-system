@@ -76,6 +76,8 @@ The user prefers the supplied agricultural landing-page reference for its image-
 
 The reference landing page adopts a panoramic photographic hero, white hero typography, generous editorial spacing and landscape/detail/human imagery. It keeps illustrative application compositions in the brand guide. Individual component documentation lives in a separate `/components` area with its own navigation. [Imagery decisions, photo provenance and colour measurements](IMAGERY.md) record what was adopted and how it was adapted.
 
+The dark interface now uses cool charcoal surfaces (`#111315` canvas, `#1B1F22` cards), with teal accents. Logo, typography, icons, 3D and motion have dedicated chapters in the brand guide. Low-poly area illustration is a shared visual direction; detailed species and geographic viewers retain the precision their purpose needs. See [spatial guidance](SPATIAL.md) and [motion guidance](MOTION.md).
+
 Still open: palette feedback, broader imagery including community activity and regional food, application integrations and rollout.
 
 ## Implementation authorization

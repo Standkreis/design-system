@@ -97,6 +97,8 @@ CI runs both commands on pushes and pull requests. `npm run format` applies form
 
 - [Brand principles and conversation decisions](docs/BRAND.md)
 - [Imagery direction and photo provenance](docs/IMAGERY.md)
+- [3D and spatial design](docs/SPATIAL.md)
+- [Motion and reduced-motion behaviour](docs/MOTION.md)
 - [Integration, theme setup and migration boundaries](docs/INTEGRATION.md)
 - [shadcn/ui provenance and adaptations](docs/SHADCN.md)
 - [MIT implementation licence](LICENSE), [brand usage](BRAND-USAGE.md), [upstream notice](packages/ui/THIRD_PARTY_NOTICES.md), [font licence](packages/ui/assets/fonts/OFL.txt)

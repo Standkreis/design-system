@@ -8,14 +8,18 @@ export function usePathname() {
     return () => window.removeEventListener("popstate", update);
   }, []);
   useEffect(() => {
-    if (window.location.hash) {
-      document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
-    } else {
-      window.scrollTo({ top: 0, behavior: "instant" });
+    const target = window.location.hash
+      ? document.getElementById(window.location.hash.slice(1))
+      : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo({ top: 0, behavior: "instant" });
+    const heading =
+      target?.querySelector<HTMLElement>("h1, h2") ??
+      document.querySelector<HTMLElement>("main h1");
+    if (heading) {
+      heading.tabIndex = -1;
+      heading.focus({ preventScroll: true });
     }
-    document
-      .querySelector<HTMLElement>("main h1")
-      ?.focus({ preventScroll: true });
   }, [pathname]);
   return pathname.replace(/\/$/, "") || "/";
 }
