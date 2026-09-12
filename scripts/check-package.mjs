@@ -79,12 +79,12 @@ try {
   );
   await writeFile(
     path.join(temporary, "main.js"),
-    `import React from 'react';import {createRoot} from 'react-dom/client';import {Button,Brand,StandkreisProvider} from '@standkreis/ui';import '@standkreis/ui/fonts.css';import '@standkreis/ui/styles.css';createRoot(document.getElementById('root')).render(React.createElement(StandkreisProvider,{},React.createElement(Brand,{product:'Atlas'}),React.createElement(Button,{},'Discover')));`,
+    `import React from 'react';import {createRoot} from 'react-dom/client';import {Button,Brand,Card,CardTitle,StandkreisProvider} from '@standkreis/ui';import '@standkreis/ui/fonts.css';import '@standkreis/ui/styles.css';createRoot(document.getElementById('root')).render(React.createElement(StandkreisProvider,{},React.createElement(Brand,{product:'Atlas'}),React.createElement(Card,{variant:'soft',asChild:true},React.createElement('article',{},React.createElement(CardTitle,{asChild:true},React.createElement('h2',{},'Discover')),React.createElement(Button,{variant:'inverse',shape:'pill'},'Explore')))));`,
   );
   run("node", [
     "--input-type=module",
     "-e",
-    `import {renderToString} from 'react-dom/server';import {createElement} from 'react';import {Brand} from '@standkreis/ui';import {Button} from '@standkreis/ui/components/button';const html=renderToString(createElement(Brand,{product:'Atlas'}));if(!html.includes('Atlas')||!Button)throw Error('Package exports failed');`,
+    `import {renderToString} from 'react-dom/server';import {createElement} from 'react';import {Brand,Card} from '@standkreis/ui';import {Button} from '@standkreis/ui/components/button';const html=renderToString(createElement(Brand,{product:'Atlas'}));const card=renderToString(createElement(Card,{asChild:true,variant:'soft'},createElement('article',{},'Place')));if(!card.startsWith('<article')||card.includes('<div'))throw Error('Card semantic composition failed');if(!html.includes('Atlas')||!Button)throw Error('Package exports failed');`,
   ]);
   run(path.join(temporary, "node_modules/.bin/vite"), ["build"]);
   const assets = await readdir(path.join(temporary, "dist/assets"));
@@ -95,7 +95,11 @@ try {
     path.join(temporary, "dist/assets", cssFile),
     "utf8",
   );
-  if (!css.includes("--primary") || !css.includes("prefers-reduced-motion"))
+  if (
+    !css.includes("--primary") ||
+    !css.includes("--inverse-action") ||
+    !css.includes("prefers-reduced-motion")
+  )
     throw new Error("Packed styles did not resolve");
   console.log(
     `Packed consumer passed: ${packed.filename}; ${contents.length} files; ESM, subpath exports, CSS and four fonts resolve without workspace source.`,

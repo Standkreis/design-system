@@ -18,3 +18,5 @@ React 19 and React DOM 19 are peer dependencies. Styles are precompiled; no Tail
 The initial version is installed from a packed archive, not yet from the npm registry. See the [repository](https://github.com/Standkreis/design-system) for setup, integration, contribution and verification commands.
 
 The code is MIT licensed with upstream notices preserved. Fonts use SIL OFL. See BRAND-USAGE.md before using Standkreis's name or logo. No proprietary photographs or 3D models are included.
+
+Card offers default, soft, outline, primary and inverse surfaces. Card, CardTitle and CardDescription support `asChild` for semantic composition. Use `<Button variant="inverse" shape="pill">` for a light action on a dark photographic surface. The default Button remains rounded; all Card variants follow the shared radius scale.

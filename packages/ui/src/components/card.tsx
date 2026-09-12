@@ -1,16 +1,42 @@
 "use client";
 
 import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui";
 import { cn } from "@standkreis/ui/lib/utils";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+const cardVariants = cva(
+  "flex flex-col gap-6 rounded-xl border py-6 [--card-description-foreground:var(--muted-foreground)]",
+  {
+    variants: {
+      variant: {
+        default: "bg-card text-card-foreground shadow-sm",
+        soft: "border-transparent bg-secondary text-secondary-foreground",
+        outline: "bg-transparent text-foreground",
+        primary:
+          "border-transparent bg-primary text-primary-foreground [--card-description-foreground:var(--primary-foreground)]",
+        inverse:
+          "border-transparent bg-inverse text-inverse-foreground [--card-description-foreground:var(--inverse-foreground)]",
+      },
+    },
+    defaultVariants: { variant: "default" },
+  },
+);
+
+type CardProps = React.ComponentProps<"div"> &
+  VariantProps<typeof cardVariants> & { asChild?: boolean };
+function Card({
+  className,
+  variant = "default",
+  asChild = false,
+  ...props
+}: CardProps) {
+  const Comp = asChild ? Slot.Root : "div";
   return (
-    <div
+    <Comp
       data-slot="card"
-      className={cn(
-        "flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm",
-        className,
-      )}
+      data-variant={variant}
+      className={cn(cardVariants({ variant }), className)}
       {...props}
     />
   );
@@ -29,9 +55,14 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+function CardTitle({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "div";
   return (
-    <div
+    <Comp
       data-slot="card-title"
       className={cn("leading-none font-semibold", className)}
       {...props}
@@ -39,11 +70,19 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+function CardDescription({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "div";
   return (
-    <div
+    <Comp
       data-slot="card-description"
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn(
+        "text-sm text-[var(--card-description-foreground,var(--muted-foreground))]",
+        className,
+      )}
       {...props}
     />
   );
@@ -83,6 +122,8 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 export {
+  cardVariants,
+  type CardProps,
   Card,
   CardHeader,
   CardFooter,
