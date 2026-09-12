@@ -40,3 +40,5 @@ The reference uses Card for application frames, repeated field panels, logo pane
 The dedicated component reference exposes all Badge variants in both themes. Its destructive variant now uses the opaque `destructive` / `destructive-foreground` token pair, matching Button, instead of a translucent dark background with a fixed white label. This fixes the low contrast found by the expanded preview checks.
 
 SelectTrigger adds `size="icon"`: a 44px square trigger without the chevron, using the existing shared border and focus styles. Default and small triggers remain unchanged. Consumers provide an accessible name and a description of the current value; the preview's appearance selector uses an icon in the trigger and labelled options.
+
+Card adds `info`, `success`, `error` and `warning` surfaces. Each uses the shared status/surface token pair and passes the same readable colour to CardDescription. These variants add presentation only; callers still choose appropriate document and live-region semantics. DiscoveryFeedback now uses `success` instead of the primary action ink. UncertaintyNotice retains its warning pair, updated to amber.

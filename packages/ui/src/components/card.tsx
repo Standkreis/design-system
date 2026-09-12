@@ -15,6 +15,13 @@ const cardVariants = cva(
         outline: "bg-transparent text-foreground",
         primary:
           "border-transparent bg-primary text-primary-foreground [--card-description-foreground:var(--primary-foreground)]",
+        info: "border-transparent bg-info-surface text-info [--card-description-foreground:var(--info)]",
+        success:
+          "border-transparent bg-success-surface text-success [--card-description-foreground:var(--success)]",
+        error:
+          "border-transparent bg-error-surface text-error [--card-description-foreground:var(--error)]",
+        warning:
+          "border-transparent bg-warning-surface text-warning [--card-description-foreground:var(--warning)]",
         inverse:
           "border-transparent bg-inverse text-inverse-foreground [--card-description-foreground:var(--inverse-foreground)]",
       },

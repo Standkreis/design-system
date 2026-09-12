@@ -83,3 +83,18 @@ Still open: palette feedback, broader imagery including community activity and r
 ## Implementation authorization
 
 The user requested a new repository in the Standkreis organisation and authorised starting the design system based on shadcn/ui. The initial library and reference app implement the shared foundations; application migrations remain separate work.
+
+## UI status colours
+
+Teal expresses primary actions. UI states have separate semantic colours, with a foreground for text/icons and a tinted background in each theme. Do not use colour alone to communicate state.
+
+| State   | Purpose                           | Light text / surface  | Dark text / surface   |
+| ------- | --------------------------------- | --------------------- | --------------------- |
+| Info    | Helpful context                   | `#1D4ED8` / `#EFF6FF` | `#93C5FD` / `#17243A` |
+| Success | A completed action                | `#166534` / `#F0FDF4` | `#86EFAC` / `#172D22` |
+| Error   | A failed action or invalid input  | `#B42318` / `#FFF1F0` | `#FFB4A8` / `#361F20` |
+| Warning | Caution or unresolved uncertainty | `#92400E` / `#FFFBEB` | `#FCD34D` / `#302919` |
+
+Use `--info`, `--success`, `--error`, `--warning` and their `-surface` companions. The shared Card variants provide these pairs without page-specific styles. DiscoveryFeedback uses success; UncertaintyNotice uses warning. Destructive actions retain the separate `destructive` / `destructive-foreground` pair: red communicates the consequence of an action there, rather than an existing failure.
+
+Brand chapter headings use the sidebar labels exactly in EN/DE. Introductory section descriptions have been removed; examples and concrete usage guidance remain within chapters.

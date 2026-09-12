@@ -250,3 +250,57 @@ test("compact appearance selector retains labelled choices and header boundary w
   expect(new Set(geometry.padding).size).toBe(1);
   expect(geometry.alignment).toBeLessThan(1);
 });
+
+test("brand headings match navigation and semantic colours reach shared components", async ({
+  page,
+}) => {
+  await page.goto("/brand");
+  for (const locale of ["en", "de"]) {
+    if (locale === "de")
+      await page.getByRole("button", { name: "Switch to German" }).click();
+    const links = page.locator(".brand-navigation a");
+    for (const link of await links.all()) {
+      const id = (await link.getAttribute("href"))!.split("#")[1];
+      if (id === "overview") continue; // The overview is the marketing study.
+      await expect(page.locator(`#${id} > .section-heading h2`)).toHaveText(
+        (await link.textContent())!,
+      );
+    }
+  }
+  await expect(page.locator(".section-heading > p")).toHaveCount(0);
+  for (const colour of ["info", "success", "error", "warning"]) {
+    await expect(
+      page.locator(`.status-colours [data-variant="${colour}"]`),
+    ).toHaveCount(1);
+  }
+  for (const colorScheme of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+    await expect
+      .poll(() =>
+        page.locator("html").evaluate((el) => el.classList.contains("dark")),
+      )
+      .toBe(colorScheme === "dark");
+    const matches = await page.evaluate(() =>
+      ["info", "success", "error", "warning"].map((status) => {
+        const card = document.querySelector(
+          `.status-colours [data-variant="${status}"]`,
+        )!;
+        const probe = document.createElement("div");
+        probe.style.color = `var(--${status})`;
+        probe.style.backgroundColor = `var(--${status}-surface)`;
+        document.body.append(probe);
+        const intended = getComputedStyle(probe),
+          actual = getComputedStyle(card);
+        const matches =
+          actual.color === intended.color &&
+          actual.backgroundColor === intended.backgroundColor;
+        probe.remove();
+        return matches;
+      }),
+    );
+    expect(matches).toEqual([true, true, true, true]);
+  }
+  await page.goto("/components/discovery-feedback");
+  await page.getByRole("button", { name: "Beispiel speichern" }).click();
+  await expect(page.getByRole("status")).toContainText("Begegnung gespeichert");
+});

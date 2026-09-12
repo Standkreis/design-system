@@ -79,7 +79,7 @@ try {
   );
   await writeFile(
     path.join(temporary, "main.js"),
-    `import React from 'react';import {createRoot} from 'react-dom/client';import {Button,Brand,Card,CardTitle,StandkreisProvider} from '@standkreis/ui';import '@standkreis/ui/fonts.css';import '@standkreis/ui/styles.css';createRoot(document.getElementById('root')).render(React.createElement(StandkreisProvider,{},React.createElement(Brand,{product:'Atlas'}),React.createElement(Card,{variant:'soft',asChild:true},React.createElement('article',{},React.createElement(CardTitle,{asChild:true},React.createElement('h2',{},'Discover')),React.createElement(Button,{variant:'inverse',shape:'pill'},'Explore')))));`,
+    `import React from 'react';import {createRoot} from 'react-dom/client';import {Button,Brand,Card,CardTitle,StandkreisProvider} from '@standkreis/ui';import '@standkreis/ui/fonts.css';import '@standkreis/ui/styles.css';createRoot(document.getElementById('root')).render(React.createElement(StandkreisProvider,{},React.createElement(Brand,{product:'Atlas'}),React.createElement(Card,{variant:'success',asChild:true},React.createElement('article',{},React.createElement(CardTitle,{asChild:true},React.createElement('h2',{},'Discover')),React.createElement(Button,{variant:'inverse',shape:'pill'},'Explore')))));`,
   );
   run("node", [
     "--input-type=module",
@@ -98,6 +98,11 @@ try {
   if (
     !css.includes("--primary") ||
     !css.includes("--inverse-action") ||
+    !["info", "success", "error", "warning"].every(
+      (status) =>
+        css.includes(`--${status}-surface`) &&
+        css.includes(`.bg-${status}-surface`),
+    ) ||
     !css.includes("prefers-reduced-motion")
   )
     throw new Error("Packed styles did not resolve");
