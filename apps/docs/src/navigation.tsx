@@ -2,21 +2,37 @@ import { useEffect, useState, type ComponentProps } from "react";
 
 export function usePathname() {
   const [pathname, setPathname] = useState(window.location.pathname);
+  const [hash, setHash] = useState(window.location.hash);
   useEffect(() => {
-    const update = () => setPathname(window.location.pathname);
+    const update = () => {
+      setPathname(window.location.pathname);
+      setHash(window.location.hash);
+    };
     window.addEventListener("popstate", update);
-    return () => window.removeEventListener("popstate", update);
+    window.addEventListener("hashchange", update);
+    return () => {
+      window.removeEventListener("popstate", update);
+      window.removeEventListener("hashchange", update);
+    };
   }, []);
   useEffect(() => {
-    if (window.location.hash) {
-      document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
-    } else {
-      window.scrollTo({ top: 0, behavior: "instant" });
+    const target = window.location.hash
+      ? document.getElementById(window.location.hash.slice(1))
+      : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo({ top: 0, behavior: "instant" });
+    const heading =
+      target?.querySelector<HTMLElement>("h1, h2") ??
+      document.querySelector<HTMLElement>("main h1");
+    if (heading) {
+      heading.tabIndex = -1;
+      // Native fragment navigation clears focus; apply it after that step.
+      const frame = requestAnimationFrame(() =>
+        heading.focus({ preventScroll: true }),
+      );
+      return () => cancelAnimationFrame(frame);
     }
-    document
-      .querySelector<HTMLElement>("main h1")
-      ?.focus({ preventScroll: true });
-  }, [pathname]);
+  }, [pathname, hash]);
   return pathname.replace(/\/$/, "") || "/";
 }
 

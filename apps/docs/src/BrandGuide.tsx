@@ -45,6 +45,8 @@ import {
   UncertaintyNotice,
   type Locale,
 } from "@standkreis/ui";
+import { MotionStudy } from "./MotionStudy";
+import { SpatialStudy } from "./SpatialStudy";
 import { ImageryStudy } from "./LandingStudy";
 import { DocLink } from "./navigation";
 import standkreisMark from "@standkreis/ui/assets/marks/standkreis-mark.svg?url";
@@ -321,43 +323,42 @@ export function BrandGuide({ locale }: { locale: Locale }) {
         </Card>
       </section>
 
-      <Section
-        id="identity"
-        number="01"
-        title={t("Gathered around a place.", "Gemeinsam um einen Ort.")}
-        description={t(
-          "The Standkreis mark: three equal arcs, three equal gaps and one shared centre. One opening faces right.",
-          "Das Standkreis-Zeichen: drei gleiche Bögen, drei gleiche Abstände und eine gemeinsame Mitte. Eine Öffnung zeigt nach rechts.",
-        )}
-      >
-        <div className="logo-specimens">
-          <Card variant="primary" className="logo-primary">
-            <span>{t("Gathered circle", "Gemeinsamer Kreis")}</span>
-            <BrandMark width={118} height={118} />
-            <small>{t("One shared centre", "Eine gemeinsame Mitte")}</small>
-          </Card>
-          <Card variant="inverse" className="logo-inverse">
-            <Brand product="Atlas" />
-            <div className="small-marks">
-              {[16, 24, 36, 48].map((size) => (
-                <BrandMark key={size} width={size} height={size} />
-              ))}
-            </div>
-            <a href={standkreisMark} download>
-              {t("Download SVG", "SVG herunterladen")}{" "}
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
-          </Card>
-        </div>
-      </Section>
+      <div id="identity">
+        <Section
+          id="logo"
+          number="01"
+          title={t("Logo", "Logo")}
+          description={t(
+            "The Standkreis mark: three equal arcs, three equal gaps and one shared centre. One opening faces right.",
+            "Das Standkreis-Zeichen: drei gleiche Bögen, drei gleiche Abstände und eine gemeinsame Mitte. Eine Öffnung zeigt nach rechts.",
+          )}
+        >
+          <div className="logo-specimens">
+            <Card variant="primary" className="logo-primary">
+              <span>{t("Gathered circle", "Gemeinsamer Kreis")}</span>
+              <BrandMark width={118} height={118} />
+              <small>{t("One shared centre", "Eine gemeinsame Mitte")}</small>
+            </Card>
+            <Card variant="inverse" className="logo-inverse">
+              <Brand product="Atlas" />
+              <div className="small-marks">
+                {[16, 24, 36, 48].map((size) => (
+                  <BrandMark key={size} width={size} height={size} />
+                ))}
+              </div>
+              <a href={standkreisMark} download>
+                {t("Download SVG", "SVG herunterladen")}{" "}
+                <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            </Card>
+          </div>
+        </Section>
+      </div>
 
       <Section
         id="colour"
         number="02"
-        title={t(
-          "Quiet surfaces. Human character.",
-          "Ruhige Flächen. Menschlicher Charakter.",
-        )}
+        title={t("Colours", "Farben")}
         description={t(
           "Teal 500 gives the brand a fresh accent. A deeper action shade supports white labels. Neutral surfaces let photography carry the colour, with Titillium Web throughout.",
           "Teal 500 gibt der Marke einen frischen Akzent. Ein tieferer Aktionston trägt weiße Beschriftungen. Neutrale Flächen lassen den Fotografien ihre Farben, mit Titillium Web als gemeinsamer Schrift.",
@@ -379,6 +380,16 @@ export function BrandGuide({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
+      </Section>
+      <Section
+        id="typography"
+        number="03"
+        title={t("Typography", "Typografie")}
+        description={t(
+          "Titillium Web brings a human character to headlines, reading and controls. Use the same family across every application.",
+          "Titillium Web gibt Überschriften, Lesetext und Bedienelementen einen menschlichen Charakter. Nutze dieselbe Schriftfamilie in jeder Anwendung.",
+        )}
+      >
         <Card variant="default" className="type-specimen">
           <div>
             <span className="eyebrow">TITILLIUM WEB / 600</span>
@@ -409,6 +420,16 @@ export function BrandGuide({ locale }: { locale: Locale }) {
             <i>Malus domestica · Quercus robur</i>
           </div>
         </Card>
+      </Section>
+      <Section
+        id="icons"
+        number="04"
+        title={t("Icons", "Icons")}
+        description={t(
+          "Lucide line icons give familiar actions a consistent shape. Keep symbols simple and pair unfamiliar actions with a visible label.",
+          "Lucide-Linienicons geben vertrauten Aktionen eine einheitliche Form. Halte Symbole einfach und kombiniere unbekannte Aktionen mit einer sichtbaren Beschriftung.",
+        )}
+      >
         <div className="icon-row">
           {[
             [ScanLine, t("Identify", "Bestimmen")],
@@ -429,11 +450,39 @@ export function BrandGuide({ locale }: { locale: Locale }) {
             );
           })}
         </div>
+        <div className="icon-guidance">
+          <Card variant="soft">
+            <CardHeader>
+              <CardTitle>
+                {t("A consistent stroke", "Eine einheitliche Linie")}
+              </CardTitle>
+              <CardDescription>
+                {t(
+                  "Use 24 px for standalone symbols and 16 px inside controls. Brand illustrations use a 1.65 px stroke; shared controls retain their component defaults.",
+                  "Nutze 24 px für eigenständige Symbole und 16 px in Bedienelementen. Markendarstellungen nutzen eine Strichstärke von 1,65 px; gemeinsame Bedienelemente behalten ihre Komponenten-Standards.",
+                )}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+          <Card variant="soft">
+            <CardHeader>
+              <CardTitle>
+                {t("Meaning before decoration", "Bedeutung vor Dekoration")}
+              </CardTitle>
+              <CardDescription>
+                {t(
+                  "Keep the same icon for the same action. Decorative icons stay hidden from screen readers; icon-only controls need an accessible name.",
+                  "Nutze dasselbe Icon für dieselbe Aktion. Dekorative Icons bleiben für Screenreader verborgen; reine Icon-Bedienelemente brauchen einen zugänglichen Namen.",
+                )}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
       </Section>
 
       <Section
         id="imagery"
-        number="03"
+        number="05"
         title={t("Life brings the colour.", "Das Leben bringt die Farbe.")}
         description={t(
           "A landscape, a small detail, a moment of care. Photography gives the shared identity warmth and a sense of place.",
@@ -444,12 +493,24 @@ export function BrandGuide({ locale }: { locale: Locale }) {
       </Section>
 
       <Section
+        id="spatial"
+        number="06"
+        title={t("3D & spatial design", "3D & räumliche Gestaltung")}
+        description={t(
+          "Make relationships tangible: a place, the layers of a forest garden or the structure of a plant. Low-poly illustration is a shared direction for area overviews and imagining possibilities.",
+          "Mache Zusammenhänge greifbar: einen Ort, die Schichten eines Waldgartens oder den Aufbau einer Pflanze. Low-Poly-Illustration ist eine gemeinsame Richtung für Flächenübersichten und das Entwerfen von Möglichkeiten.",
+        )}
+      >
+        <SpatialStudy locale={locale} />
+      </Section>
+
+      <Section
         id="patterns"
-        number="04"
+        number="07"
         title={t("Helpful through uncertainty.", "Hilfreich bei Unsicherheit.")}
         description={t(
-          "Explain what is known. Offer a next step without pressure. Motion follows a deliberate action and respects reduced-motion preferences.",
-          "Erkläre, was bekannt ist. Biete ohne Druck einen nächsten Schritt an. Bewegung folgt einer bewussten Aktion und respektiert reduzierte Bewegung.",
+          "Explain what is known. Offer a next step without pressure. Keep the same clear, encouraging voice in English and German.",
+          "Erkläre, was bekannt ist. Biete ohne Druck einen nächsten Schritt an. Bewahre dieselbe klare, ermutigende Sprache auf Englisch und Deutsch.",
         )}
       >
         <div className="pattern-grid">
@@ -464,26 +525,28 @@ export function BrandGuide({ locale }: { locale: Locale }) {
           </div>
           <Card variant="soft">
             <CardHeader>
-              <CardTitle>{t("At your pace", "In deinem Tempo")}</CardTitle>
+              <CardTitle>
+                {t("Clear, kind and honest", "Klar, freundlich und ehrlich")}
+              </CardTitle>
               <CardDescription>
                 {t(
-                  "Motion responds to you. It never asks you to come back.",
-                  "Bewegung reagiert auf dich. Sie fordert dich nie zum Zurückkommen auf.",
+                  "Speak directly, explain uncertainty and leave the choice with the person.",
+                  "Sprich direkt, erkläre Unsicherheit und überlasse dem Menschen die Entscheidung.",
                 )}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="small-note">
                 {t(
-                  "Keep transitions brief, preserve focus and respect reduced motion. No ambient loops, streaks or daily reminders.",
-                  "Halte Übergänge kurz, bewahre den Fokus und respektiere reduzierte Bewegung. Keine Dauerschleifen, Streaks oder täglichen Erinnerungen.",
+                  "Say what is known, what remains open and what someone can do next. Avoid blame, invented certainty and pressure to contribute.",
+                  "Sage, was bekannt ist, was offen bleibt und welcher nächste Schritt möglich ist. Vermeide Schuldzuweisungen, erfundene Gewissheit und Beitragsdruck.",
                 )}
               </p>
               <Button asChild variant="link">
-                <DocLink href="/components/discovery-feedback">
+                <DocLink href="/components/uncertainty-notice">
                   {t(
-                    "Explore the interaction patterns",
-                    "Interaktionsmuster ansehen",
+                    "Explore uncertainty guidance",
+                    "Hinweise zu Unsicherheit ansehen",
                   )}
                   <ArrowRight aria-hidden="true" />
                 </DocLink>
@@ -494,8 +557,20 @@ export function BrandGuide({ locale }: { locale: Locale }) {
       </Section>
 
       <Section
+        id="motion"
+        number="08"
+        title={t("Motion", "Bewegung")}
+        description={t(
+          "A response to your curiosity, never a request for your attention. Motion connects an action to its result and helps you keep your place.",
+          "Eine Antwort auf deine Neugier, niemals eine Forderung nach deiner Aufmerksamkeit. Bewegung verbindet eine Aktion mit ihrem Ergebnis und hilft dir, die Orientierung zu behalten.",
+        )}
+      >
+        <MotionStudy locale={locale} />
+      </Section>
+
+      <Section
         id="guidance"
-        number="05"
+        number="09"
         title={t("Built around care.", "Für ein achtsames Miteinander.")}
         description={t(
           "The system carries more than colours. These principles guide what we build and how it behaves.",

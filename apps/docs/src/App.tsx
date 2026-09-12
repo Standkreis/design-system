@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Github, Sun, Moon, Menu } from "lucide-react";
+import { ArrowRight, Github, Sun, Moon, Menu, Monitor } from "lucide-react";
 import {
   Brand,
-  BrandMark,
   Button,
   Select,
   SelectContent,
@@ -59,19 +58,73 @@ function Reference({
   useEffect(() => {
     document.title = `${components ? (current?.name ?? t("Components", "Komponenten")) : t("Brand guide", "Markenrichtlinien")} · Standkreis`;
   }, [components, current, locale]);
+  const [activeBrandSection, setActiveBrandSection] = useState("overview");
   const sections = [
     ["overview", t("Overview", "Überblick")],
     ["applications", t("Applications", "Anwendungen")],
-    ["identity", t("Identity", "Identität")],
-    ["colour", t("Colour & type", "Farbe & Schrift")],
+    ["logo", t("Logo", "Logo")],
+    ["colour", t("Colours", "Farben")],
+    ["typography", t("Typography", "Typografie")],
+    ["icons", t("Icons", "Icons")],
     ["imagery", t("Imagery", "Bildsprache")],
-    ["patterns", t("Voice & motion", "Sprache & Bewegung")],
+    ["spatial", t("3D & space", "3D & Raum")],
+    ["patterns", t("Voice", "Sprache")],
+    ["motion", t("Motion", "Bewegung")],
     ["guidance", t("Principles", "Prinzipien")],
   ];
+  useEffect(() => {
+    if (components) return;
+    let frame = 0;
+    const update = () => {
+      const edge =
+        (document.querySelector(".site-header")?.getBoundingClientRect()
+          .bottom ?? 0) + 64;
+      const ids = [
+        "overview",
+        "applications",
+        "logo",
+        "colour",
+        "typography",
+        "icons",
+        "imagery",
+        "spatial",
+        "patterns",
+        "motion",
+        "guidance",
+      ];
+      const current = ids
+        .filter((id) => {
+          const section = document.getElementById(id);
+          return section && section.getBoundingClientRect().top <= edge;
+        })
+        .at(-1);
+      setActiveBrandSection(current ?? "overview");
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [components]);
+  const appearanceLabel =
+    theme === "dark"
+      ? t("Dark", "Dunkel")
+      : theme === "light"
+        ? t("Light", "Hell")
+        : t("System", "System");
+  const AppearanceIcon =
+    theme === "dark" ? Moon : theme === "light" ? Sun : Monitor;
   const componentNav = (mobile = false) => (
     <nav
       aria-label={t("Component documentation", "Komponentendokumentation")}
-      className="component-navigation"
+      className="component-navigation dashboard-navigation"
     >
       <DocLink
         href="/components"
@@ -84,7 +137,7 @@ function Reference({
       </DocLink>
       {(["primitive", "pattern"] as const).map((group) => (
         <div key={group} className="nav-group">
-          <span className="eyebrow">
+          <span className="nav-group-label">
             {group === "primitive"
               ? t("Components", "Komponenten")
               : t("Standkreis patterns", "Standkreis-Muster")}
@@ -147,6 +200,7 @@ function Reference({
         <div className="header-controls">
           <Button
             variant="ghost"
+            size="icon"
             onClick={() => setLocale(locale === "en" ? "de" : "en")}
             aria-label={t("Switch to German", "Zu Englisch wechseln")}
           >
@@ -158,19 +212,29 @@ function Reference({
           >
             <SelectTrigger
               aria-label={t("Appearance", "Darstellung")}
-              className="theme-select"
+              aria-describedby="appearance-value"
+              size="icon"
             >
-              {theme === "dark" ? (
-                <Moon aria-hidden="true" />
-              ) : (
-                <Sun aria-hidden="true" />
-              )}
-              <SelectValue />
+              <SelectValue>
+                <AppearanceIcon aria-hidden="true" />
+                <span className="sr-only" id="appearance-value">
+                  {appearanceLabel}
+                </span>
+              </SelectValue>
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="system">{t("System", "System")}</SelectItem>
-              <SelectItem value="light">{t("Light", "Hell")}</SelectItem>
-              <SelectItem value="dark">{t("Dark", "Dunkel")}</SelectItem>
+            <SelectContent position="popper" align="end">
+              <SelectItem value="system">
+                <Monitor aria-hidden="true" />
+                {t("System", "System")}
+              </SelectItem>
+              <SelectItem value="light">
+                <Sun aria-hidden="true" />
+                {t("Light", "Hell")}
+              </SelectItem>
+              <SelectItem value="dark">
+                <Moon aria-hidden="true" />
+                {t("Dark", "Dunkel")}
+              </SelectItem>
             </SelectContent>
           </Select>
           <Button asChild variant="ghost" size="icon">
@@ -186,7 +250,7 @@ function Reference({
           className={`docs-layout ${components ? "components-layout" : "brand-layout"}`}
         >
           <aside className="sidebar">
-            <span className="eyebrow">
+            <span className="sidebar-title">
               {components
                 ? t("Component library", "Komponentenbibliothek")
                 : t("Brand guide", "Markenrichtlinien")}
@@ -237,32 +301,40 @@ function Reference({
                 </div>
               </>
             ) : (
-              <nav aria-label={t("Brand documentation", "Markendokumentation")}>
-                {sections.map(([id, title]) => (
-                  <DocLink key={id} href={`/brand#${id}`}>
-                    {title}
-                    <ArrowRight aria-hidden="true" size={14} />
-                  </DocLink>
+              <nav
+                className="dashboard-navigation brand-navigation"
+                aria-label={t("Brand documentation", "Markendokumentation")}
+              >
+                {[
+                  {
+                    title: t("Explore", "Entdecken"),
+                    items: sections.slice(0, 2),
+                  },
+                  {
+                    title: t("Identity", "Identität"),
+                    items: sections.slice(2, 8),
+                  },
+                  {
+                    title: t("Behaviour", "Verhalten"),
+                    items: sections.slice(8),
+                  },
+                ].map((group) => (
+                  <div className="nav-group" key={group.title}>
+                    <span className="nav-group-label">{group.title}</span>
+                    {group.items.map(([id, title]) => (
+                      <DocLink
+                        key={id}
+                        href={`/brand#${id}`}
+                        aria-current={
+                          activeBrandSection === id ? "location" : undefined
+                        }
+                      >
+                        {title}
+                      </DocLink>
+                    ))}
+                  </div>
                 ))}
               </nav>
-            )}
-            {!components && (
-              <div className="sidebar-note">
-                <BrandMark width={48} height={48} />
-                <p>
-                  {t(
-                    "Different rooms.\nThe same place.",
-                    "Verschiedene Räume.\nEin gemeinsamer Ort.",
-                  )}
-                </p>
-                <DocLink href="/components">
-                  {t(
-                    "Open the component library",
-                    "Komponentenbibliothek öffnen",
-                  )}{" "}
-                  →
-                </DocLink>
-              </div>
             )}
           </aside>
           <div className="main-content">

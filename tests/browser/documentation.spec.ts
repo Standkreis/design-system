@@ -145,3 +145,108 @@ test("component examples support keyboard interaction and local feedback", async
   await page.getByRole("link", { name: "All components", exact: true }).click();
   await expect(page).toHaveURL(/\/components$/);
 });
+
+test("brand chapters use smooth anchors and include motion and spatial interactions", async ({
+  page,
+}) => {
+  await page.goto("/brand");
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "smooth");
+  const nav = page.getByRole("navigation", { name: "Brand documentation" });
+  await nav.getByRole("link", { name: "Logo", exact: true }).click();
+  await expect(page).toHaveURL(/#logo$/);
+  await expect(
+    nav.getByRole("link", { name: "Logo", exact: true }),
+  ).toHaveAttribute("aria-current", "location");
+  await expect(page.locator("#logo a[download]")).toHaveCount(1);
+  await nav.getByRole("link", { name: "Icons", exact: true }).click();
+  await expect(
+    nav.getByRole("link", { name: "Icons", exact: true }),
+  ).toHaveAttribute("aria-current", "location");
+  await expect(page.locator("#icons .icon-row svg")).toHaveCount(8);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
+  await page.goto("/brand#motion");
+  await expect(page.locator("#motion-title")).toBeFocused();
+  await page
+    .locator("#motion")
+    .getByRole("button", { name: "Try a transition" })
+    .click();
+  await expect(page.locator('[data-slot="sheet-content"]')).toHaveCSS(
+    "animation-name",
+    "none",
+  );
+  await page.keyboard.press("Escape");
+  await expect(
+    page.locator("#motion").getByRole("button", { name: "Try a transition" }),
+  ).toBeFocused();
+  await page.goto("/brand#spatial");
+  const scene = page.getByTestId("spatial-study");
+  const initial = await scene.locator("polygon").first().getAttribute("points");
+  const initialCount = await scene.locator("polygon").count();
+  await page.getByRole("button", { name: "Rotate right", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(scene.locator("polygon").first()).not.toHaveAttribute(
+    "points",
+    initial!,
+  );
+  await page.getByRole("button", { name: "Top view", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Top view", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page
+    .getByRole("switch", { name: "Tree crowns", exact: true })
+    .uncheck();
+  await expect
+    .poll(() => scene.locator("polygon").count())
+    .toBeLessThan(initialCount);
+  await page.getByRole("button", { name: "Reset view", exact: true }).click();
+  await expect(scene.locator("polygon").first()).toHaveAttribute(
+    "points",
+    initial!,
+  );
+  await expect(scene.locator("polygon")).toHaveCount(initialCount);
+});
+
+test("compact appearance selector retains labelled choices and header boundary while scrolling", async ({
+  page,
+}) => {
+  await page.goto("/components");
+  const trigger = page.getByRole("combobox", {
+    name: "Appearance",
+    exact: true,
+  });
+  await expect(trigger).toHaveAttribute("data-size", "icon");
+  await expect(trigger).toHaveAccessibleDescription("System");
+  await trigger.focus();
+  await page.keyboard.press("Space");
+  await expect(
+    page.getByRole("option", { name: "Light", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("option", { name: "Dark", exact: true }).click();
+  await expect(trigger).toHaveAccessibleDescription("Dark");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.evaluate(() => window.scrollTo(0, 500));
+  await expect(page.locator(".site-header")).toBeInViewport();
+  await expect(page.locator(".components-layout")).toHaveCSS(
+    "border-top-width",
+    "0px",
+  );
+  const geometry = await page.locator(".site-header").evaluate((el) => {
+    const s = getComputedStyle(el),
+      r = el.getBoundingClientRect();
+    const brand = el.querySelector(".home-link")!.getBoundingClientRect();
+    const controls = el
+      .querySelector(".header-controls")!
+      .getBoundingClientRect();
+    return {
+      top: r.top,
+      padding: [s.paddingTop, s.paddingRight, s.paddingBottom, s.paddingLeft],
+      alignment: Math.abs(
+        (brand.top + brand.bottom) / 2 - (controls.top + controls.bottom) / 2,
+      ),
+    };
+  });
+  expect(geometry.top).toBe(0);
+  expect(new Set(geometry.padding).size).toBe(1);
+  expect(geometry.alignment).toBeLessThan(1);
+});
